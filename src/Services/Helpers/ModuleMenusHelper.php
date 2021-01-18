@@ -2,7 +2,7 @@
 
 namespace Dizatech\ModuleMenu\Services\Helpers;
 
-use App\Models\ModuleMenu;
+use Dizatech\ModuleMenu\Models\ModuleMenu;
 use Illuminate\Support\Facades\Schema;
 
 class ModuleMenusHelper{

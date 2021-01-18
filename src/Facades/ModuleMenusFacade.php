@@ -2,8 +2,6 @@
 
 namespace Dizatech\ModuleMenu\Facades;
 
-use App\Facades\BaseFacade;
-
 /**
  *
  * @method static string getMenuList()
