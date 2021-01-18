@@ -20,33 +20,37 @@ class ModuleMenusHelper{
             $sub_menus = $first_menu->children;
 
             $items['admin_links'][] = array(
-                'id' => $first_menu->name,
+                'id' => $first_menu->id,
                 'title' => $first_menu->title,
                 'route' => '',
-                'icon' => $first_menu->icon
+                'icon' => $first_menu->icon,
+                'permissions' => $first_menu->permissions
             );
             $n = 0;
             if (!empty($sub_menus) || $sub_menus != null){
                 foreach ($sub_menus as $sub_menu){
                     if ($sub_menu->children->count() > 0){
                         $items['admin_links'][] = array(
-                            'id' => $sub_menu->name,
+                            'id' => $sub_menu->id,
                             'title' => $sub_menu->title,
                             'route' => '',
-                            'icon' => $sub_menu->icon
+                            'icon' => $sub_menu->icon,
+                            'permissions' => $sub_menu->permissions
                         );
                         $n ++;
                         foreach ($sub_menu->children as $child){
-                            $menu_item['id'] = $child['name'];
+                            $menu_item['id'] = $child['id'];
                             $menu_item['title'] = $child['title'];
                             $menu_item['route'] = $child['route'];
+                            $menu_item['permissions'] = $child->permissions;
 
                             $items['admin_links'][$n]['children'][] = $menu_item;
                         }
                     }else{
-                        $menu_item['id'] = $sub_menu['name'];
+                        $menu_item['id'] = $sub_menu['id'];
                         $menu_item['title'] = $sub_menu['title'];
                         $menu_item['route'] = $sub_menu['route'];
+                        $menu_item['permissions'] = $sub_menu->permissions;
 
                         $items['admin_links'][$n]['children'][] = $menu_item;
                     }
