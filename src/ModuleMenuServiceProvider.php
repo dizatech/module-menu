@@ -2,7 +2,8 @@
 
 namespace Dizatech\ModuleMenu;
 
-use App\Facades\ModuleMenusFacade;
+use Dizatech\ModuleMenu\Facades\ModuleMenusFacade;
+use Dizatech\ModuleMenu\Services\Helpers\ModuleMenusHelper;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -15,7 +16,7 @@ class ModuleMenuServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        ModuleMenusFacade::shouldProxyTo(ModuleMenusHelper::class);
     }
 
 
