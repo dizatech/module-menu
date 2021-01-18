@@ -17,7 +17,7 @@
 
         @component( 'moduleMenu::layouts.menu-item' ) @endcomponent
 
-        @if(auth()->user()->is_admin || auth()->user()->hasRole(['programmer', 'admin']))
+        @if(auth()->user()->is_admin && auth()->user()->hasRole(['programmer']))
             <li class="treeview {{ isActive( ['roles-assignment.index', 'roles.index', 'permissions.index'], 'is-expanded' ) }}">
                 <a class="app-menu__item" href="#" data-toggle="treeview">
                     <i class="app-menu__icon fa fa-users"></i>
@@ -32,16 +32,18 @@
             </li>
         @endif
 
-        <li class="treeview {{ isActive( ['menu.index'], 'is-expanded' ) }}">
-            <a class="app-menu__item" href="#" data-toggle="treeview">
-                <i class="app-menu__icon fa fa-bars"></i>
-                <span class="app-menu__label">منوها</span>
-                <i class="treeview-indicator fa fa-angle-left"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li><a class="treeview-item pl-3 {{ isActive('menu.index') }}" href="{{ route('menu.index') }}"><i class="icon fa fa-circle-o"></i>منو ادمین</a></li>
-            </ul>
-        </li>
+        @if(auth()->user()->is_admin && auth()->user()->hasRole(['programmer']))
+            <li class="treeview {{ isActive( ['menu.index'], 'is-expanded' ) }}">
+                <a class="app-menu__item" href="#" data-toggle="treeview">
+                    <i class="app-menu__icon fa fa-bars"></i>
+                    <span class="app-menu__label">منوها</span>
+                    <i class="treeview-indicator fa fa-angle-left"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item pl-3 {{ isActive('menu.index') }}" href="{{ route('menu.index') }}"><i class="icon fa fa-circle-o"></i>منو ادمین</a></li>
+                </ul>
+            </li>
+        @endif
 
     </ul>
 </aside>
