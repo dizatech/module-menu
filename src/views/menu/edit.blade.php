@@ -119,6 +119,7 @@
                                                 <input type="checkbox"
                                                        name="roles[]"
                                                        value="{{$role->id}}"
+                                                       {!! $menu->roles()->where('role_id' , $role->id)->count() > 0 ? 'checked' : '' !!}
                                                        class="custom-control-input"
                                                        id="{{ 'role'.$role->id  }}">
                                                 <label class="custom-control-label" for="{{ 'role'.$role->id  }}">{{$role->name}}</label>
@@ -138,6 +139,7 @@
                                                     <input type="checkbox"
                                                            name="permissions[]"
                                                            value="{{$permission->id}}"
+                                                           {!! $menu->permissions()->where('permission_id' , $permission->id)->count() > 0 ? 'checked' : '' !!}
                                                            class="custom-control-input"
                                                            id="{{ 'permission'.$permission->id  }}">
                                                     <label class="custom-control-label" for="{{ 'permission'.$permission->id  }}">{{$permission->name}}</label>

@@ -30,6 +30,14 @@ class MenuController extends Controller
         $menu->fill($request->except(['roles','permissions']));
         $menu->creator_id = Auth()->user()->id;
         $menu->save();
+
+        if ($request->roles != null){
+            $menu->roles()->attach($request->roles);
+        }
+        if ($request->permissions != null){
+            $menu->permissions()->attach($request->permissions);
+        }
+
         session()->flash('success', 'منو با موفقیت ایجاد شد.');
         return redirect()->route('menu.edit', compact('menu'));
     }
@@ -47,6 +55,10 @@ class MenuController extends Controller
     public function update(MenuRequest $request, ModuleMenu $menu)
     {
         $menu->fill($request->except(['roles','permissions']))->save();
+
+        $menu->roles()->sync($request->roles);
+        $menu->permissions()->sync($request->permissions);
+
         session()->flash('success', 'منو با موفقیت ویرایش شد.');
         return redirect()->back();
     }
