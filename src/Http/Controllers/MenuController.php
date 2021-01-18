@@ -3,8 +3,8 @@
 namespace Dizatech\ModuleMenu\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MenuRequest;
-use App\Models\ModuleMenu;
+use Dizatech\ModuleMenu\Http\Requests\MenuRequest;
+use Dizatech\ModuleMenu\Models\ModuleMenu;
 use App\Models\Permission;
 use App\Models\Role;
 
@@ -13,12 +13,12 @@ class MenuController extends Controller
     public function index()
     {
         $menus = ModuleMenu::query()->paginate();
-        return view('panel.menus.index', compact('menus'));
+        return view('moduleMenu::menu.index', compact('menus'));
     }
 
     public function create()
     {
-        return view('panel.menus.create', [
+        return view('moduleMenu::menu.create', [
             'menus' => ModuleMenu::query()->get(),
             'roles' => Role::all(),
             'permissions' => Permission::all()
@@ -31,12 +31,12 @@ class MenuController extends Controller
         $menu->creator_id = Auth()->user()->id;
         $menu->save();
         session()->flash('success', 'منو با موفقیت ایجاد شد.');
-        return redirect()->route('menus.edit', compact('menu'));
+        return redirect()->route('moduleMenu::menu.edit', compact('menu'));
     }
 
     public function edit(ModuleMenu $menu)
     {
-        return view('panel.menus.edit', [
+        return view('moduleMenu::menu.edit', [
             'menus' => ModuleMenu::query()->get(),
             'menu' => $menu,
             'roles' => Role::all(),

@@ -1,37 +1,38 @@
-@component('panel.layouts.component', ['title' => 'ایجاد منو'])
+@component('panel.layouts.component', ['title' => 'ویرایش منو'])
 
     @slot('style')
     @endslot
 
     @slot('subject')
         <h1>
-            <i class="fa fa-user"></i> ایجاد منو
+            <i class="fa fa-user"></i> ویرایش منو
         </h1>
         <p>این بخش
-            برای ایجاد منو جدید
+            برای ویرایش منو
             است.</p>
     @endslot
 
     @slot('breadcrumb')
-        <li class="breadcrumb-item"><a href="{{ route('menus.index') }}">منو ادمین</a></li>
-        <li class="breadcrumb-item">ایجاد منو</li>
+        <li class="breadcrumb-item"><a href="{{ route('menu.index') }}">منو ادمین</a></li>
+        <li class="breadcrumb-item">ویرایش منو</li>
     @endslot
 
     @slot('content')
         <div class="row">
             <div class="col-md-12">
-                @component('components.collapse-card', ['title' => 'ایجاد منو جدید'])
+                @component('components.collapse-card', ['title' => 'ویرایش منو'])
                     @slot('body')
                         <form method="POST"
-                              action="{{ route('menus.store') }}" autocomplete="off">
+                              action="{{ route('menu.update', $menu) }}" enctype="multipart/form-data" autocomplete="off">
                             @csrf
+                            @method('PATCH')
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <span class="text-danger">*</span>
                                         <label for="title"><strong>عنوان</strong></label>
                                         <input class="form-control  @error('title') is-invalid @enderror"
-                                               name="title" id="title" value="{{ old('title') }}"
+                                               name="title" id="title" value="{{ old('title', $menu->title) }}"
                                                autocomplete="off">
 
                                         @error('title')
@@ -48,7 +49,7 @@
                                         <label for="name"><strong>نام</strong></label>
                                         <input id="name" type="text" style="direction: ltr"
                                                class="form-control @error('name') is-invalid @enderror" name="name"
-                                               value="{{ old('name') }}" autocomplete="off">
+                                               value="{{ old('name', $menu->name) }}" autocomplete="off">
 
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -64,7 +65,7 @@
                                         <label for="icon"><strong>آیکون</strong></label>
                                         <input class="form-control  @error('icon') is-invalid @enderror"
                                                name="icon" id="icon" type="text" style="direction: ltr"
-                                               value="{{ old('icon') }}"
+                                               value="{{ old('icon', $menu->icon) }}"
                                                autocomplete="off">
 
                                         @error('icon')
@@ -83,7 +84,7 @@
                                         <label for="route"><strong>مسیر</strong></label>
                                         <input id="route" type="text" style="direction: ltr"
                                                class="form-control @error('route') is-invalid @enderror" name="route"
-                                               value="{{ old('route') }}" autocomplete="off">
+                                               value="{{ old('route', $menu->route) }}" autocomplete="off">
 
                                         @error('route')
                                         <span class="invalid-feedback" role="alert">
@@ -99,9 +100,9 @@
                                         <select name="parent_id" id="parent_id"
                                                 class="form-control select2 @error ('parent_id') is-invalid @enderror">
                                             <option value="0">انتخاب نمایید</option>
-                                            @foreach($menus as $menu)
-                                                <option value="{{ $menu->id }}"
-                                                    {{ old('parent_id') == $menu->id ? 'selected' : '' }}>{{$menu->title}}
+                                            @foreach($menus as $item)
+                                                <option value="{{ $item->id }}"
+                                                    {{ old('parent_id', $menu->parent_id) == $item->id ? 'selected' : '' }}>{{$item->title}}
                                                 </option>
                                             @endforeach
                                         </select>

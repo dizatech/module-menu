@@ -30,7 +30,7 @@
                         @endcomponent
 
                         <div class="mt-4">
-                            <a href={{ route('menus.create') }} type="button" class="btn btn-primary"><i class="fa fa-plus"></i> ایجاد منو</a>
+                            <a href={{ route('menu.create') }} type="button" class="btn btn-primary"><i class="fa fa-plus"></i> ایجاد منو</a>
                         </div>
 
                         @component('components.table')
@@ -55,7 +55,7 @@
                                             {{$menu->name}}
                                         </td>
                                         <td>
-                                            <a  href="{{route('menus.edit', $menu->id)}}"
+                                            <a  href="{{route('menu.edit', $menu->id)}}"
                                                 class="btn btn-sm btn-success">
                                                 ویرایش اطلاعات
                                             </a>
@@ -109,7 +109,7 @@
                         if (result.isConfirmed) {
                             $.ajax({
                                 type: "delete",
-                                url: baseUrl + '/panel/menus/' + id,
+                                url: baseUrl + '/panel/menu/' + id,
                                 dataType: 'json',
                                 success: function (response) {
                                     Swal.fire({
