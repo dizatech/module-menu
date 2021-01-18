@@ -6,6 +6,7 @@ namespace Dizatech\ModuleMenu\Facades;
  *
  * @method static string getMenuList()
  * @method static string hasMenu()
+ * @method static string initModuleMenu()
  *
  * @see \App\Services\Helpers\ModuleMenusHelper
  */
