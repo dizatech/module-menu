@@ -31,7 +31,7 @@ class MenuController extends Controller
         $menu->creator_id = Auth()->user()->id;
         $menu->save();
         session()->flash('success', 'منو با موفقیت ایجاد شد.');
-        return redirect()->route('moduleMenu::menu.edit', compact('menu'));
+        return redirect()->route('menu.edit', compact('menu'));
     }
 
     public function edit(ModuleMenu $menu)
