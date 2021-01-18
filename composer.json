@@ -1,0 +1,30 @@
+{
+    "name": "dizatech/module-menu",
+    "type": "laravel-package",
+    "description": "",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sina Rajabpour",
+            "email": "sina.rajabpour@outlook.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "7.1.*|7.2.*|7.3.*|7.4.*",
+        "laravel/framework": "7.*|8.*",
+        "santigarcor/laratrust": "6.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dizatech\\ModuleMenu\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dizatech\\ModuleMenu\\ModuleMenuServiceProvider"
+            ]
+        }
+    }
+}
