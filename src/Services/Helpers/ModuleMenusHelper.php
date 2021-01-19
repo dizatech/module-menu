@@ -90,7 +90,7 @@ class ModuleMenusHelper{
             ->where('parent_id', '=', $menu_id)->get();
     }
 
-    public function initModuleMenu($module_name)
+    public function init($module_name)
     {
         if ($this->hasMenu($module_name)){
             app('Module')->register($this->getMenuList('TamadkalaProduct'));
