@@ -12,8 +12,8 @@ packagist : https://packagist.org/packages/dizatech/module-menu
 ## Usage
 1. Add the following code to module service provider , at the end of
    boot() function :
-
-`ModuleMenu::init('ExampleModule');`
+   
+`\ModuleMenu::init('ExampleModule');`
 
 * Please note that `ExampleModule` is your module name
 
