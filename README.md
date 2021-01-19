@@ -5,6 +5,10 @@ laravel modules.
 ## Installation
 Using Composer :
 
+`composer require dizatech/module-menu`
+
+packagist : https://packagist.org/packages/dizatech/module-menu
+
 ## Usage
 1. Add the following code to module service provider , at the end of
    boot() function :
