@@ -10,7 +10,7 @@ Using Composer :
 packagist : https://packagist.org/packages/dizatech/module-menu
 
 ## Usage
-1.1 Add the following code to module service provider , at the end of
+1. Add the following code to module service provider , at the end of
    boot() function :
 
 `ModuleMenu::init('ExampleModule');`
