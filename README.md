@@ -29,7 +29,7 @@ or
 
 ## ChangeLog
 
-### v 1.0.0
+### version 1.0.0
 Initial release, base structure :
 * Create, edit and delete menu
 * Add permission or rule to the specific menu
