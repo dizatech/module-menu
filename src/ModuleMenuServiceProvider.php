@@ -5,6 +5,7 @@ namespace Dizatech\ModuleMenu;
 use Dizatech\ModuleMenu\Facades\ModuleMenusFacade;
 use Dizatech\ModuleMenu\Services\Helpers\ModuleMenusHelper;
 use Dizatech\ModuleMenu\View\Components\ModuleMenu;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -18,6 +19,10 @@ class ModuleMenuServiceProvider extends ServiceProvider
     public function register()
     {
         ModuleMenusFacade::shouldProxyTo(ModuleMenusHelper::class);
+        $this->app->booting(function() {
+            $loader = AliasLoader::getInstance();
+            $loader->alias('ModuleMenu', ModuleMenusFacade::class);
+        });
     }
 
 
