@@ -13,8 +13,16 @@ Using Composer :
 
 * Please note that `ExampleModule` is your module name
 
-2. Add the following code in the app.php main layout blade :
+2. Add the following code after `panel.layouts.navbar` component in 
+   the app.blade.php main layout :
 
 `@component('moduleMenu::layouts.sidebar')
 @endcomponent`
 
+## ChangeLog
+
+### v 1.0.0
+Initial release, base structure :
+* Create, edit and delete menu
+* Add permission or rule to the specific menu
+* Handling menu permissions

@@ -1,7 +1,7 @@
 {
     "name": "dizatech/module-menu",
     "type": "laravel-package",
-    "description": "",
+    "description": "This package provides menu generator for modules in laravel apps.",
     "license": "MIT",
     "authors": [
         {
