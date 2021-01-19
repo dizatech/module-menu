@@ -10,7 +10,11 @@ Using Composer :
 packagist : https://packagist.org/packages/dizatech/module-menu
 
 ## Usage
-1. Add the following code to module service provider , at the end of
+1.1 Add the following code at top of the module service provider :
+
+`use Dizatech\ModuleMenu\Facades\ModuleMenusFacade;`
+
+1.2. Add the following code to module service provider , at the end of
    boot() function :
 
 `ModuleMenusFacade::initModuleMenu('ExampleModule');`
@@ -22,6 +26,10 @@ packagist : https://packagist.org/packages/dizatech/module-menu
 
 `@component('moduleMenu::layouts.sidebar')
 @endcomponent`
+
+3. run the following command :
+
+`php artisan migrate`
 
 ## ChangeLog
 
