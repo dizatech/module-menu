@@ -4,6 +4,7 @@ namespace Dizatech\ModuleMenu;
 
 use Dizatech\ModuleMenu\Facades\ModuleMenusFacade;
 use Dizatech\ModuleMenu\Services\Helpers\ModuleMenusHelper;
+use Dizatech\ModuleMenu\View\Components\ModuleMenu;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -34,5 +35,8 @@ class ModuleMenuServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/config/module-menu.php' =>config_path('module-menu')
         ], 'module-menu');
+        $this->loadViewComponentsAs('', [
+            ModuleMenu::class
+        ]);
     }
 }

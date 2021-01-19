@@ -24,7 +24,10 @@
         "laravel": {
             "providers": [
                 "Dizatech\\ModuleMenu\\ModuleMenuServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "ModuleMenu" : "Dizatech\\ModuleMenu\\Facades\\ModuleMenusFacade"
+            }
         }
     }
 }

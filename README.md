@@ -10,22 +10,18 @@ Using Composer :
 packagist : https://packagist.org/packages/dizatech/module-menu
 
 ## Usage
-1.1 Add the following code at top of the module service provider :
-
-`use Dizatech\ModuleMenu\Facades\ModuleMenusFacade;`
-
-1.2. Add the following code to module service provider , at the end of
+1.1 Add the following code to module service provider , at the end of
    boot() function :
 
 `ModuleMenusFacade::initModuleMenu('ExampleModule');`
 
 * Please note that `ExampleModule` is your module name
 
-2. Add the following code after `panel.layouts.navbar` component in 
-   the app.blade.php main layout :
+2. Add the following tag in your sidebar layout (the menus will be rendered by this tag) :
 
-`@component('moduleMenu::layouts.sidebar')
-@endcomponent`
+`<x-module-menu></x-module-menu>`
+or
+`<x-module-menu />`
 
 3. run the following command :
 
