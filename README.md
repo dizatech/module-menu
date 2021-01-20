@@ -29,7 +29,7 @@ Please note that `ExampleModule` is your module name
 
 `<x-module-menu type="manager"></x-module-menu>`
 
-or shorten type :
+or shorten tags :
 
 `<x-module-menu type="modules" />`
 
