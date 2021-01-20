@@ -26,9 +26,13 @@ Please note that `ExampleModule` is your module name
    and the menu manager will be rendered by `manager` type) :
 
 `<x-module-menu type="modules"></x-module-menu>`
+
 `<x-module-menu type="manager"></x-module-menu>`
+
 or shorten type :
+
 `<x-module-menu type="modules" />`
+
 `<x-module-menu type="manager" />`
 
 Please note that the default type of `x-module-menu` tag is `manager`
