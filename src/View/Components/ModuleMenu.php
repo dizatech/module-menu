@@ -7,13 +7,25 @@ use Illuminate\View\Component;
 
 class ModuleMenu extends Component
 {
-    public function __construct()
-    {
+    /**
+     * The type of menu, modules or manager
+     * @var
+     */
+    public $type;
 
+    public function __construct($type)
+    {
+        // Set input variables to generate a component
+        $this->type = $type;
     }
 
     public function render()
     {
-        return view('moduleMenu::components.menu-item');
+        switch ($this->type){
+            case 'modules':
+                return view('moduleMenu::components.menu-item');
+            case 'manager':
+                return view('moduleMenu::components.menu-manager');
+        }
     }
 }

@@ -10,22 +10,26 @@ Using Composer :
 packagist : https://packagist.org/packages/dizatech/module-menu
 
 ## Usage
-1. Add the following code to module service provider , at the end of
+* first you need to run the following command :
+
+`php artisan migrate`
+
+* Add the following code to module service provider , at the end of
    boot() function :
    
 `\ModuleMenu::init('ExampleModule');`
 
-* Please note that `ExampleModule` is your module name
+Please note that `ExampleModule` is your module name
 
-2. Add the following tag in your sidebar layout (the menus will be rendered by this tag) :
+* Add the following tags in your sidebar layout 
+  (the module menus will be rendered by `modules` type
+   and the menu manager will be rendered by `manager` type) :
 
-`<x-module-menu></x-module-menu>`
-or
-`<x-module-menu />`
-
-3. run the following command :
-
-`php artisan migrate`
+`<x-module-menu type="modules"></x-module-menu>`
+`<x-module-menu type="manager"></x-module-menu>`
+or shorten type :
+`<x-module-menu type="modules" />`
+`<x-module-menu type="manager" />`
 
 ## ChangeLog
 
