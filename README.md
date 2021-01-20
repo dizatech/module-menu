@@ -29,17 +29,4 @@ or
 
 ## ChangeLog
 
-### version 1.0.0
-Initial release, base structure :
-* Create, edit and delete menu
-* Add permission or rule to the specific menu
-* Handling menu permissions
-
-### version 1.0.1
-* Added ModuleMenu alias in composer json (Moved to serviceProvider since v1.0.2)
-* x-module-menu tag is now available for menu render
-
-### version 1.0.2
-* Added ModuleMenu alias to easily use by `\ModuleMenu::init('ModuleName')` 
-in modules service provider
-* Removed ModuleMenu alias from composer json
+https://github.com/dizatech/module-menu/wiki/ChangeLog
