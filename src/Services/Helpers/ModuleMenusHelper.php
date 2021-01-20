@@ -92,8 +92,13 @@ class ModuleMenusHelper{
 
     public function init($module_name)
     {
-        if ($this->hasMenu($module_name)){
-            app('Module')->register($this->getMenuList('TamadkalaProduct'));
+        try {
+            \DB::connection()->getPdo();
+            if ($this->hasMenu($module_name)){
+                app('Module')->register($this->getMenuList($module_name));
+            }
+        } catch (\Exception $e) {
+            return false;
         }
     }
 
