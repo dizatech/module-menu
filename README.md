@@ -31,6 +31,8 @@ or shorten type :
 `<x-module-menu type="modules" />`
 `<x-module-menu type="manager" />`
 
+Please note that the default type of `x-module-menu` tag is `manager`
+
 ## ChangeLog
 
 https://github.com/dizatech/module-menu/wiki/ChangeLog

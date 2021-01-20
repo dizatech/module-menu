@@ -13,7 +13,7 @@ class ModuleMenu extends Component
      */
     public $type;
 
-    public function __construct($type)
+    public function __construct($type = 'manager')
     {
         // Set input variables to generate a component
         $this->type = $type;
