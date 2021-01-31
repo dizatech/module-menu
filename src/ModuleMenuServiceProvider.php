@@ -38,7 +38,8 @@ class ModuleMenuServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
         $this->mergeConfigFrom(__DIR__ . '/config/module-menu.php', 'module-menu');
         $this->publishes([
-            __DIR__.'/config/module-menu.php' =>config_path('module-menu')
+            __DIR__.'/config/module-menu.php' =>config_path('module-menu'),
+            __DIR__.'/views/' => resource_path('views/vendor/ModuleMenu'),
         ], 'module-menu');
         $this->loadViewComponentsAs('', [
             ModuleMenu::class

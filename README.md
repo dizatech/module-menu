@@ -1,8 +1,10 @@
 # Module Menu
+
 This package has a menu manager and menu generator for 
 laravel modules.
 
 ## Installation
+
 Using Composer :
 
 `composer require dizatech/module-menu`
@@ -10,7 +12,16 @@ Using Composer :
 packagist : https://packagist.org/packages/dizatech/module-menu
 
 ## Usage
-* first you need to run the following command :
+
+* publish blade files :
+
+`php artisan vendor:publish --tag=module-menu`
+
+** Please note if you already published the vendor, for updates you can run the following command :
+
+`php artisan vendor:publish --tag=module-menu --force`
+
+* run the following command :
 
 `php artisan migrate`
 

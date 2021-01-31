@@ -23,9 +23,9 @@ class ModuleMenu extends Component
     {
         switch ($this->type){
             case 'modules':
-                return view('moduleMenu::components.menu-item');
+                return view('vendor.ModuleMenu.components.menu-item');
             case 'manager':
-                return view('moduleMenu::components.menu-manager');
+                return view('vendor.ModuleMenu.components.menu-manager');
         }
     }
 }

@@ -13,12 +13,12 @@ class MenuController extends Controller
     public function index()
     {
         $menus = ModuleMenu::query()->paginate();
-        return view('moduleMenu::menu.index', compact('menus'));
+        return view('vendor.ModuleMenu.menu.index', compact('menus'));
     }
 
     public function create()
     {
-        return view('moduleMenu::menu.create', [
+        return view('vendor.ModuleMenu.menu.create', [
             'menus' => ModuleMenu::query()->get(),
             'roles' => Role::all(),
             'permissions' => Permission::all()
@@ -44,7 +44,7 @@ class MenuController extends Controller
 
     public function edit(ModuleMenu $menu)
     {
-        return view('moduleMenu::menu.edit', [
+        return view('vendor.ModuleMenu.menu.edit', [
             'menus' => ModuleMenu::query()->get(),
             'menu' => $menu,
             'roles' => Role::all(),
