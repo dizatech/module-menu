@@ -22,7 +22,7 @@ class ModuleMenusHelper{
             $items['admin_links'][] = array(
                 'id' => $first_menu->id,
                 'title' => $first_menu->title,
-                'route' => '',
+                'route' => $first_menu->route,
                 'icon' => $first_menu->icon,
                 'permissions' => $first_menu->permissions
             );
@@ -33,7 +33,7 @@ class ModuleMenusHelper{
                         $items['admin_links'][] = array(
                             'id' => $sub_menu->id,
                             'title' => $sub_menu->title,
-                            'route' => '',
+                            'route' => $sub_menu->route,
                             'icon' => $sub_menu->icon,
                             'permissions' => $sub_menu->permissions
                         );

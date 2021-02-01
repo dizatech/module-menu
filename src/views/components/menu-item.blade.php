@@ -1,6 +1,10 @@
 @foreach( app('Module')->get_enabled_modules() as $module )
     @foreach( $module['admin_links'] as $admin_link )
         @php
+            $child_routes = [];
+            foreach ($admin_link['children'] as $child){
+                $child_routes[] = $child['route'];
+            }
             $permission_names = '';
             if(!empty($admin_link['permissions'])){
                 $i = 0;
@@ -34,7 +38,7 @@
                     if( isset( $admin_link['classes'] ) && !empty( $admin_link['classes'] ) ){
                         echo implode( " ", $admin_link['classes'] );
                     }
-                @endphp {{ isActive( $module['route_names'], 'is-expanded' ) }}">
+                @endphp {{ isActive( $child_routes, 'is-expanded' ) }}">
                     <a class="app-menu__item" href="#" data-toggle="treeview">
                         <i class="app-menu__icon {{ $admin_link['icon'] }}"></i>
                         <span class="app-menu__label">{{ $admin_link['title'] }}</span>
