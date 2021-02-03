@@ -75,7 +75,7 @@
                         @endcomponent
 
                         {{--Paginate section--}}
-                        {{ $menus->withQueryString()->links() }}
+                        {{ $menus->withQueryString()->links('vendor.pagination.bootstrap-4') }}
                     @endslot
                 @endcomponent
             </div>
