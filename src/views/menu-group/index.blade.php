@@ -55,7 +55,7 @@
                                                 <td>
                                                     <a  href="{{route('front-menu.edit', $menu_group->id)}}"
                                                         class="btn btn-sm btn-success">
-                                                        ویرایش اطلاعات
+                                                        مدیریت منوها
                                                     </a>
 
                                                 </td>

@@ -6,6 +6,6 @@
     </a>
     <ul class="treeview-menu">
         <li><a class="treeview-item pl-3 {{ isActive('menu.index') }}" href="{{ route('menu.index') }}"><i class="icon fa fa-circle-o"></i>منو ادمین</a></li>
-        <li><a class="treeview-item pl-3 {{ isActive('front-menu.index') }}" href="{{ route('front-menu.index') }}"><i class="icon fa fa-circle-o"></i>منو سایت</a></li>
+        <li><a class="treeview-item pl-3 {{ isActive('front-menu.index') }}" href="{{ route('menu-group.index') }}"><i class="icon fa fa-circle-o"></i>منو سایت</a></li>
     </ul>
 </li>

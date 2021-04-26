@@ -8,6 +8,8 @@ Route::group([
 ], function () {
     Route::resource('menu', 'MenuController')
         ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    Route::resource('menu-group', 'GroupMenuController')
+        ->only(['index']);
     Route::resource('front-menu', 'FrontMenuController')
-        ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+        ->only(['edit']);
 });

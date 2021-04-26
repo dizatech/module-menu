@@ -3,10 +3,10 @@
 namespace Dizatech\ModuleMenu\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Dizatech\ModuleMenu\Models\Menu;
+use Dizatech\ModuleMenu\Models\MenuGroup;
 use Illuminate\Http\Request;
 
-class FrontMenuController extends Controller
+class GroupMenuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,8 @@ class FrontMenuController extends Controller
      */
     public function index()
     {
-
+        $menu_groups = MenuGroup::query()->paginate();
+        return view('vendor.ModuleMenu.menu-group.index', compact('menu_groups'));
     }
 
     /**
@@ -56,11 +57,9 @@ class FrontMenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Menu $menu)
+    public function edit($id)
     {
-        return view('vendor.ModuleMenu.front-menu.edit', [
-            'menu' => $menu
-        ]);
+        //
     }
 
     /**
