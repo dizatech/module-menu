@@ -12,4 +12,5 @@ Route::group([
         ->only(['index']);
     Route::resource('front-menu', 'FrontMenuController')
         ->only(['edit']);
+    Route::post('front-menu/get/menus/{FrontMenu}', 'FrontMenuController@getMenus');
 });

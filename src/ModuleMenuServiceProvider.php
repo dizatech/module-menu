@@ -40,6 +40,7 @@ class ModuleMenuServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/config/module-menu.php' =>config_path('module-menu'),
             __DIR__.'/views/' => resource_path('views/vendor/ModuleMenu'),
+            __DIR__.'/assets/' => resource_path('js/vendor/ModuleMenu')
         ], 'module-menu');
         $this->loadViewComponentsAs('', [
             ModuleMenu::class

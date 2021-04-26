@@ -4,6 +4,7 @@ namespace Dizatech\ModuleMenu\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Dizatech\ModuleMenu\Models\Menu;
+use Dizatech\ModuleMenu\Models\MenuGroup;
 use Illuminate\Http\Request;
 
 class FrontMenuController extends Controller
@@ -56,10 +57,10 @@ class FrontMenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Menu $menu)
+    public function edit(MenuGroup $FrontMenu)
     {
         return view('vendor.ModuleMenu.front-menu.edit', [
-            'menu' => $menu
+            'menu_group' => $FrontMenu
         ]);
     }
 
@@ -84,5 +85,10 @@ class FrontMenuController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getMenus(MenuGroup $FrontMenu)
+    {
+        return json_encode($FrontMenu->menus);
     }
 }
