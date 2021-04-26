@@ -48,7 +48,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-
+                                            @component('vendor.ModuleMenu.components.front-menu.menu-creator', ['button_label' => 'آیتم منو', 'button_class' => 'btn btn-success', 'modal_title' => 'ایجاد/ویرایش آیتم منو', 'data_type' => "menu_item"])
+                                            @endcomponent
                                         </div>
                                     </div>
                                     @component('components.table', ['id' => 'site_menus_table'])
@@ -56,8 +57,7 @@
                                             <tr>
                                                 <th>شناسه</th>
                                                 <th>عنوان</th>
-                                                <th>نام</th>
-                                                <th>نوع</th>
+                                                <th>وضعیت</th>
                                                 <th>عملیات</th>
                                             </tr>
                                         @endslot
