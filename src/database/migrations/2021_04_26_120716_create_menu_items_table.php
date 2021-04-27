@@ -22,7 +22,7 @@ class CreateMenuItemsTable extends Migration
             $table->string('type');
             $table->string('css_class')->nullable();
             $table->integer('status')->default(0);
-            $table->integer('menu_order');
+            $table->integer('sort_order')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

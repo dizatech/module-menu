@@ -14,4 +14,5 @@ Route::group([
         ->only(['edit','destroy']);
     Route::post('front-menu/get/menus/{FrontMenu}', 'FrontMenuController@getMenus');
     Route::patch('front-menu/update/{FrontMenu}', 'FrontMenuController@update');
+    Route::post('front-menu/sort', 'FrontMenuController@sortMenu');
 });

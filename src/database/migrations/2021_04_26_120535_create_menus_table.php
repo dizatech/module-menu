@@ -18,6 +18,7 @@ class CreateMenusTable extends Migration
             $table->string('title');
             $table->string('css_class')->nullable();
             $table->integer('status')->default(0);
+            $table->integer('sort_order')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

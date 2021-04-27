@@ -53,7 +53,7 @@ function load_front_menu(empty_table) {
 function add_menu_row( target, menu_title, menu_status, menu_id ){
     target.append(
         "<tr class='list_row'>" +
-        "<td>" + menu_id + " <input type='hidden' name='menus_id[]' value='" + menu_id + "'></td>" +
+        "<td>" + menu_id + " <input type='hidden' name='menu_ids[]' value='" + menu_id + "'></td>" +
         "<td>" + menu_title + " </td>" +
         "<td>" + menu_status + "</td>" +
         "<td>" +
@@ -227,3 +227,50 @@ function show_error_messages(res){
     }
 }
 // end show error messages for ajax menu
+
+// start menus table sort method
+let menus_table = $("#site_menus_table tbody");
+var fixHelperModified = function(e, tr) {
+    var $originals = tr.children();
+    var $helper = tr.clone();
+    $helper.children().each(function(index) {
+        $(this).width($originals.eq(index).width())
+    });
+    return $helper;
+};
+updateIndex = function() {
+    let menus = [];
+    $('input[name^="menu_ids"]').each(function(i) {
+        if ( ! $(this).val() == '' ){
+            menus[i] = $(this).val();
+        }
+    });
+    $.ajax({
+        type: 'post',
+        url: baseUrl + '/panel/front-menu/sort',
+        data: {
+            menu_ids : menus
+        },
+        dataType: 'json',
+        success: function (response) {
+            alertify.success("منوها مرتب‌سازی شد.");
+        },
+        error: function (response) {
+            show_error_messages(response);
+        }
+    });
+};
+
+menus_table.sortable({
+    helper: fixHelperModified,
+    stop: updateIndex
+}).disableSelection();
+
+menus_table.sortable({
+    distance: 5,
+    delay: 100,
+    opacity: 0.6,
+    cursor: 'move',
+    update: function() {}
+});
+// end menus table sort method

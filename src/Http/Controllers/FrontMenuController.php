@@ -3,6 +3,7 @@
 namespace Dizatech\ModuleMenu\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Dizatech\ModuleMenu\Facades\MenusFacade;
 use Dizatech\ModuleMenu\Http\Requests\FrontMenuRequest;
 use Dizatech\ModuleMenu\Models\Menu;
 use Dizatech\ModuleMenu\Models\MenuGroup;
@@ -74,14 +75,8 @@ class FrontMenuController extends Controller
      */
     public function update(FrontMenuRequest $request, MenuGroup $FrontMenu)
     {
-        $menuGroup = $FrontMenu;
         if ($request->menu_id == 0){
-            $menu = Menu::query()->create([
-                'title' => $request->title,
-                'css_class' => $request->css_class,
-                'status' => $request->menu_status
-            ]);
-            $menuGroup->menus()->attach($menu);
+            $menu = MenusFacade::createMenu($request,$FrontMenu);
             $response = json_encode(array(
                 'status' => '200',
                 'id' => $menu->id,
@@ -107,6 +102,17 @@ class FrontMenuController extends Controller
 
     public function getMenus(MenuGroup $FrontMenu)
     {
-        return json_encode($FrontMenu->menus);
+        return json_encode($FrontMenu->menus()->orderBy('sort_order')->get());
+    }
+
+    public function sortMenu(Request $request)
+    {
+        $request->validate([
+            'menu_ids' => 'required'
+        ]);
+        MenusFacade::sortMenus($request->menu_ids);
+        return json_encode(array(
+            'status' => '200'
+        ));
     }
 }

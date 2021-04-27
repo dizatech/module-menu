@@ -11,7 +11,7 @@ class Menu extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['title', 'css_class', 'status'];
+    protected $fillable = ['title', 'css_class', 'status', 'sort_order'];
     protected $appends = ['status_label'];
 
     public function menu_groups() {
