@@ -75,13 +75,17 @@ class FrontMenuController extends Controller
     {
         $menuGroup = $FrontMenu;
         if ($request->menu_id == 0){
-            $menu = Menu::query()->create($request->except(['menu_id']));
+            $menu = Menu::query()->create([
+                'title' => $request->title,
+                'css_class' => $request->css_class,
+                'status' => $request->menu_status
+            ]);
             $menuGroup->menus()->attach($menu);
             $response = json_encode(array(
                 'status' => '200',
                 'id' => $menu->id,
                 'title' => $menu->title,
-                'status' => $menu->status,
+                'status_label' => $menu->status_label,
                 'message' => 'منو باموفقیت ثبت شد.',
             ));
         }

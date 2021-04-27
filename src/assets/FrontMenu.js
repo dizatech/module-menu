@@ -38,7 +38,7 @@ function load_front_menu(empty_table) {
             setTimeout(function (){
                 if (response.length > 0){
                     for( let i=0; i<response.length; i++ ){
-                        add_menu_row( $('#site_menus_table tbody'), response[i].title, response[i].status, response[i].id );
+                        add_menu_row( $('#site_menus_table tbody'), response[i].title, response[i].status_label, response[i].id );
                     }
                 }else {
                     site_menus_table.append(not_information);
@@ -153,8 +153,8 @@ $('.add_menu').on('click', function(e) {
             $('.not_information').hide();
             $('.has_information').hide();
             if (menu_id == 0){
-                add_menu_row($('#site_menus_table tbody'), response.title, response.status, response.id);
-                $('#menu_data :input').val('');
+                add_menu_row($('#site_menus_table tbody'), response.title, response.status_label, response.id);
+                empty_inputs();
             }else {
                 load_front_menu(true);
             }
@@ -168,6 +168,14 @@ $('.add_menu').on('click', function(e) {
 });
 // end new menu ajax handler
 
+//start empty inputs
+function empty_inputs(){
+    $('#menu_data :input').val('');
+    $(".menu_status").val(0);
+    $(".menu_status").trigger('change');
+}
+//end empty inputs
+
 // start hide menu error messages before and after ajax submit
 function hide_error_messages(){
     $('.form-group')
@@ -177,6 +185,7 @@ function hide_error_messages(){
     $('.form-group')
         .find('.is-invalid')
         .removeClass('is-invalid');
+    $(".menu_status").trigger('change');
 }
 // end hide menu error messages before and after ajax submit
 

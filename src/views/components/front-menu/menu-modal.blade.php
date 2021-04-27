@@ -29,8 +29,8 @@
                                 <div class="form-group">
                                     <span class="text-danger">*</span>
                                     <label for="status"><strong>وضعیت</strong></label>
-                                    <select name="status" id="status"
-                                            class="form-control select2">
+                                    <select name="menu_status" id="menu_status"
+                                            class="form-control menu_status">
                                         <option value="0" selected>
                                             غیرفعال
                                         </option>

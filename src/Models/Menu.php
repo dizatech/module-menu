@@ -12,6 +12,7 @@ class Menu extends Model
     use SoftDeletes;
 
     protected $fillable = ['title', 'css_class', 'status'];
+    protected $appends = ['status_label'];
 
     public function menu_groups() {
         return $this->belongsToMany(MenuGroup::class, 'menu_menu_group', 'menu_group_id', 'menu_id');
@@ -20,5 +21,19 @@ class Menu extends Model
     public function menu_items()
     {
         return $this->hasMany(MenuItem::class);
+    }
+
+    public function getStatusLabelattribute()
+    {
+        switch ($this->status){
+            case 0:
+                return 'غیرفعال';
+                break;
+            case 1:
+                return 'فعال';
+                break;
+            default:
+                return 'نامشخص';
+        }
     }
 }
