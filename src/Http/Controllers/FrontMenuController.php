@@ -3,6 +3,7 @@
 namespace Dizatech\ModuleMenu\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Dizatech\ModuleMenu\Http\Requests\FrontMenuRequest;
 use Dizatech\ModuleMenu\Models\Menu;
 use Dizatech\ModuleMenu\Models\MenuGroup;
 use Illuminate\Http\Request;
@@ -71,7 +72,7 @@ class FrontMenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MenuGroup $FrontMenu)
+    public function update(FrontMenuRequest $request, MenuGroup $FrontMenu)
     {
         $menuGroup = $FrontMenu;
         if ($request->menu_id == 0){

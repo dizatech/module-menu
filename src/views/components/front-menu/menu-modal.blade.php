@@ -15,12 +15,18 @@
                                     <span class="text-danger">*</span>
                                     <label for="title"><strong>عنوان</strong></label>
                                     <input type='text' id='title' class='form-control' name='title' value='' />
+                                    <span class="invalid-feedback d-none" role="alert">
+                                        <strong></strong>
+                                    </span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="css_class"><strong>کلاس css</strong></label>
                                     <input type='text' id='css_class' class='form-control' name='css_class' value='' />
+                                    <span class="invalid-feedback d-none" role="alert">
+                                        <strong></strong>
+                                    </span>
                                 </div>
                             </div>
                         </div>
