@@ -31,7 +31,7 @@
                                     <label for="status"><strong>وضعیت</strong></label>
                                     <select name="status" id="status"
                                             class="form-control select2">
-                                        <option value="0">
+                                        <option value="0" selected>
                                             غیرفعال
                                         </option>
                                         <option value="1">

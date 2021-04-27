@@ -21,7 +21,7 @@ class CreateMenuItemsTable extends Migration
             $table->text('url');
             $table->string('type');
             $table->string('css_class')->nullable();
-            $table->integer('status');
+            $table->integer('status')->default(0);
             $table->integer('menu_order');
             $table->timestamps();
             $table->softDeletes();

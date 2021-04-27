@@ -76,7 +76,7 @@ class FrontMenuController extends Controller
         $menuGroup = $FrontMenu;
         if ($request->menu_id == 0){
             $menu = Menu::query()->create($request->except(['menu_id']));
-            $menuGroup->menus()->sync($menu);
+            $menuGroup->menus()->attach($menu);
             $response = json_encode(array(
                 'status' => '200',
                 'id' => $menu->id,

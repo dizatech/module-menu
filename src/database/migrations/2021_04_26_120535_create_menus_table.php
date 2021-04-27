@@ -17,7 +17,7 @@ class CreateMenusTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('css_class')->nullable();
-            $table->integer('status');
+            $table->integer('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

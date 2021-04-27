@@ -18,7 +18,7 @@ class CreateMenuGroupsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('css_class')->nullable();
-            $table->integer('status');
+            $table->integer('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
