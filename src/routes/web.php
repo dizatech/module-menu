@@ -13,4 +13,5 @@ Route::group([
     Route::resource('front-menu', 'FrontMenuController')
         ->only(['edit']);
     Route::post('front-menu/get/menus/{FrontMenu}', 'FrontMenuController@getMenus');
+    Route::patch('front-menu/update/{FrontMenu}', 'FrontMenuController@update');
 });

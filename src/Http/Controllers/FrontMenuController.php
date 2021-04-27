@@ -71,9 +71,21 @@ class FrontMenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, MenuGroup $FrontMenu)
     {
-        //
+        $menuGroup = $FrontMenu;
+        if ($request->menu_id == 0){
+            $menu = Menu::query()->create($request->except(['menu_id']));
+            $menuGroup->menus()->sync($menu);
+            $response = json_encode(array(
+                'status' => '200',
+                'id' => $menu->id,
+                'title' => $menu->title,
+                'status' => $menu->status,
+                'message' => 'منو باموفقیت ثبت شد.',
+            ));
+        }
+        return $response;
     }
 
     /**
@@ -82,9 +94,10 @@ class FrontMenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Menu $FrontMenu)
     {
-        //
+        $FrontMenu->delete();
+        return response()->json(['status' => 'با موفقیت حذف شد']);
     }
 
     public function getMenus(MenuGroup $FrontMenu)
