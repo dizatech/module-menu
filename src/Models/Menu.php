@@ -11,6 +11,8 @@ class Menu extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['title', 'css_class', 'status'];
+
     public function menu_groups() {
         return $this->belongsToMany(MenuGroup::class, 'menu_menu_group', 'menu_group_id', 'menu_id');
     }
