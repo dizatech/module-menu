@@ -24,8 +24,8 @@ class FrontMenuRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required','string'],
-            'css_class' => ['string'],
+            'title' => ['required','string','max:255'],
+            'css_class' => ['string','max:255'],
             'menu_status' => ['required','in:0,1'],
         ];
     }
@@ -37,5 +37,21 @@ class FrontMenuRequest extends FormRequest
             'menu_status.required' => 'فیلد وضعیت الزامی است.',
             'css_class.string' => 'فیلد کلاس css معتبر نیست.',
         ];
+    }
+
+    protected function getValidatorInstance()
+    {
+        $validator = parent::getValidatorInstance();
+        $validator->sometimes(
+            'title',
+            ['unique:menus' ,'required'],
+            [$this, 'checkIfIsEdit']
+        );
+        return $validator;
+    }
+
+    public function checkIfIsEdit($input)
+    {
+        return !($input->menu_id > 0);
     }
 }

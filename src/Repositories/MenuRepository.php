@@ -17,6 +17,17 @@ class MenuRepository
         return $menu;
     }
 
+    public function updateMenu($request)
+    {
+        Menu::query()
+            ->where('id', '=', $request->menu_id)
+            ->update([
+                'title' => $request->title,
+                'css_class' => $request->css_class,
+                'status' => $request->menu_status,
+            ]);
+    }
+
     public function getMenuSortOrder($menuGroup)
     {
         $sort_order = 1;
@@ -36,5 +47,10 @@ class MenuRepository
             ]);
             $sort_number ++;
         }
+    }
+
+    public function getMenu($menu_id)
+    {
+        return Menu::query()->findOrFail($menu_id);
     }
 }

@@ -3,7 +3,7 @@ let menu_group = $('.menu_group').val();
 let not_information = '<tr class="not_information"><td class="text-center" colspan="5">موردی برای نمایش وجود ندارد</td></tr>';
 
 let front_menu_loading = `
-<tr class="has_fields">
+<tr class="has_menus">
      <td class="text-center" colspan="5">
           <div class="d-flex justify-content-center">
                 <div class="my-4">
@@ -139,6 +139,12 @@ function hasMenu(){
 }
 // end check if has not field then show not found
 
+$('.new_menu').on('click', function (e) {
+    empty_inputs();
+    $('.assign_success').html('');
+    $('.assign_error').html('');
+});
+
 // start add new menu ajax handler
 $('.add_menu').on('click', function(e) {
     e.preventDefault();
@@ -146,7 +152,7 @@ $('.add_menu').on('click', function(e) {
     let modal_id = $(this).data('modal');
     $.ajax({
         type: 'patch',
-        url: baseUrl + '/panel/front-menu/update/' + menu_group,
+        url: baseUrl + '/panel/front-menu/createOrUpdate/' + menu_group,
         data: $('#menu_data :input').serialize(),
         dataType: 'json',
         success: function (response) {
@@ -274,3 +280,31 @@ menus_table.sortable({
     update: function() {}
 });
 // end menus table sort method
+
+// start edit menu action
+$('#site_menus_table').on('click', '.edit_menu', function (e) {
+    e.preventDefault();
+    let menu = $(this).data('id');
+    $.ajax({
+        type: 'post',
+        url: baseUrl + '/panel/front-menu/get/menu',
+        data: {
+            menu_id : menu
+        },
+        dataType: 'json',
+        success: function (response) {
+            empty_inputs();
+            hide_error_messages();
+            $('#menu_item').modal('show');
+            $('#title').val(response.title);
+            $('#css_class').val(response.css_class);
+            $(".menu_status").val(response.menu_status);
+            $(".menu_status").trigger('change');
+            $('.menu_id').val(response.menu_id);
+        },
+        error: function (response) {
+            alertify.error("یک خطا غیرمنتظره رخ داد !");
+        }
+    });
+});
+// end edit field action

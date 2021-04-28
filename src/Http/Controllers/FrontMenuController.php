@@ -73,8 +73,11 @@ class FrontMenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FrontMenuRequest $request, MenuGroup $FrontMenu)
+    public function createOrUpdate(FrontMenuRequest $request, MenuGroup $FrontMenu)
     {
+        $response = json_encode(array(
+            'status' => '500'
+        ));
         if ($request->menu_id == 0){
             $menu = MenusFacade::createMenu($request,$FrontMenu);
             $response = json_encode(array(
@@ -83,6 +86,12 @@ class FrontMenuController extends Controller
                 'title' => $menu->title,
                 'status_label' => $menu->status_label,
                 'message' => 'منو باموفقیت ثبت شد.',
+            ));
+        }elseif ($request->menu_id > 0){
+            MenusFacade::updateMenu($request);
+            $response = json_encode(array(
+                'status' => '200',
+                'message' => 'تغییرات منو باموفقیت ذخیره شد.'
             ));
         }
         return $response;
@@ -113,6 +122,21 @@ class FrontMenuController extends Controller
         MenusFacade::sortMenus($request->menu_ids);
         return json_encode(array(
             'status' => '200'
+        ));
+    }
+
+    public function getMenu(Request $request)
+    {
+        $request->validate([
+            'menu_id' => 'required'
+        ]);
+        $menu = MenusFacade::getMenu($request->menu_id);
+        return json_encode(array(
+            'status' => '200',
+            'title' => $menu->title,
+            'css_class' => $menu->css_class,
+            'menu_status' => $menu->status,
+            'menu_id' => $menu->id
         ));
     }
 }

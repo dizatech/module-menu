@@ -13,6 +13,7 @@ Route::group([
     Route::resource('front-menu', 'FrontMenuController')
         ->only(['edit','destroy']);
     Route::post('front-menu/get/menus/{FrontMenu}', 'FrontMenuController@getMenus');
-    Route::patch('front-menu/update/{FrontMenu}', 'FrontMenuController@update');
+    Route::patch('front-menu/createOrUpdate/{FrontMenu}', 'FrontMenuController@createOrUpdate');
     Route::post('front-menu/sort', 'FrontMenuController@sortMenu');
+    Route::post('front-menu/get/menu', 'FrontMenuController@getMenu');
 });

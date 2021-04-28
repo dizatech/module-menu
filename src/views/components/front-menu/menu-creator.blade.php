@@ -1,4 +1,4 @@
-<span class="{{ $button_class }}" data-toggle="modal" data-target="#{{ $data_type }}" data-type="{{ $data_type }}">
+<span class="{{ $button_class }} new_menu" data-toggle="modal" data-target="#{{ $data_type }}" data-type="{{ $data_type }}">
         <i class="fa fa-plus"></i>
         {{ $button_label }}
     </span>
