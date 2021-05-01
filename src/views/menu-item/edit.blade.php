@@ -94,6 +94,12 @@
             $(".menu_status").select2({
                 theme: "bootstrap"
             });
+            $(".type").select2({
+                theme: "bootstrap"
+            });
+            $(".parent_id").select2({
+                theme: "bootstrap"
+            });
         </script>
     @endslot
 

@@ -46,6 +46,59 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span class="text-danger">*</span>
+                                    <label for="type"><strong>نوع</strong></label>
+                                    <select name="type" id="type"
+                                            class="form-control type">
+                                        <option value="news" selected>
+                                            خبر
+                                        </option>
+                                        <option value="news_category">
+                                            دسته‌بندی خبر
+                                        </option>
+                                        <option value="article">
+                                            مقاله
+                                        </option>
+                                        <option value="article_category">
+                                            دسته‌بندی مقاله
+                                        </option>
+                                        <option value="video">
+                                            ویدیو
+                                        </option>
+                                        <option value="video_category">
+                                            دسته‌بندی ویدیو
+                                        </option>
+                                        <option value="service">
+                                            خدمت
+                                        </option>
+                                        <option value="service_category">
+                                            دسته‌بندی خدمت
+                                        </option>
+                                        <option value="laboratory">
+                                            آزمایشگاه
+                                        </option>
+                                        <option value="equipment">
+                                            تجهیزات
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span class="text-danger"></span>
+                                    <label for="parent_id"><strong>والد</strong></label>
+                                    <select name="parent_id" id="parent_id"
+                                            class="form-control parent_id">
+                                        <option value="0" selected>
+                                            test
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <!-- menu inputs must be placed in here -->
                         <input type="hidden" name="menu_item_id" value="0" class="menu_item_id">
