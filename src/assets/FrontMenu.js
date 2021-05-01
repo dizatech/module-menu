@@ -141,8 +141,7 @@ function hasMenu(){
 
 $('.new_menu').on('click', function (e) {
     empty_inputs();
-    $('.assign_success').html('');
-    $('.assign_error').html('');
+    hide_error_messages();
 });
 
 // start add new menu ajax handler
@@ -162,10 +161,14 @@ $('.add_menu').on('click', function(e) {
                 add_menu_row($('#site_menus_table tbody'), response.title, response.status_label, response.id);
                 empty_inputs();
             }else {
-                load_front_menu(true);
+                hide_error_messages();
+                if (response.status == 500){
+                    show_error_message(modal_id,response.message);
+                }else {
+                    load_front_menu(true);
+                    show_success_message(modal_id,response.message);
+                }
             }
-            hide_error_messages();
-            show_success_message(modal_id,response.message);
         },
         error: function (response) {
             show_error_messages(response);
@@ -184,6 +187,8 @@ function empty_inputs(){
 
 // start hide menu error messages before and after ajax submit
 function hide_error_messages(){
+    $('.assign_success').html('');
+    $('.assign_error').html('');
     $('.form-group')
         .find('.invalid-feedback')
         .addClass('d-none')
@@ -200,6 +205,20 @@ function show_success_message(modal_id,message){
     $('#' + modal_id).find('.assign_success').text('');
     $('#' + modal_id).find('.assign_success').html(
         '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
+        message +
+        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+        '<span aria-hidden="true">&times;</span>' +
+        '</button>' +
+        '</div>'
+    );
+}
+// end show success messages for ajax request
+
+// start show success messages for ajax request
+function show_error_message(modal_id,message){
+    $('#' + modal_id).find('.assign_error').text('');
+    $('#' + modal_id).find('.assign_error').html(
+        '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
         message +
         '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
         '<span aria-hidden="true">&times;</span>' +
