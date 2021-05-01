@@ -327,3 +327,23 @@ $('#menu_items_table').on('click', '.edit_menu_item', function (e) {
     });
 });
 // end edit field action
+
+$('.type').on('change', function () {
+    switch ($(this).val()) {
+        case 'custom':
+            $('.item_title').show('.5');
+            $('.item_url').show('.5');
+            break;
+        case 'heading':
+            $('.item_title').show('.5');
+            $('.item_url').hide('.5');
+            break;
+        case '':
+            $('.item_title').hide('.5');
+            $('.item_url').hide('.5');
+            break;
+        default:
+            $('.item_title').show('.5');
+            $('.item_url').hide('.5');
+    }
+});
