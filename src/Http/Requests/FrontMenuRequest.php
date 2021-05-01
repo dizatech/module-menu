@@ -38,20 +38,4 @@ class FrontMenuRequest extends FormRequest
             'css_class.string' => 'فیلد کلاس css معتبر نیست.',
         ];
     }
-
-    protected function getValidatorInstance()
-    {
-        $validator = parent::getValidatorInstance();
-        $validator->sometimes(
-            'title',
-            ['unique:menus' ,'required'],
-            [$this, 'checkIfIsEdit']
-        );
-        return $validator;
-    }
-
-    public function checkIfIsEdit($input)
-    {
-        return !($input->menu_id > 0);
-    }
 }
