@@ -8,6 +8,10 @@ namespace Dizatech\ModuleMenu\Facades;
  * @method static string updateMenu()
  * @method static string sortMenus()
  * @method static string getMenu()
+ * * @method static string createMenuItem()
+ * @method static string updateMenuItem()
+ * @method static string sortMenuItems()
+ * @method static string getMenuItem()
  *
  * @see \App\Services\Helpers\ModuleMenusHelper
  */

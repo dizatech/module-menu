@@ -1,9 +1,9 @@
-let menu_group = $('.menu_group').val();
+let menu = $('.menu').val();
 
 let not_information = '<tr class="not_information"><td class="text-center" colspan="5">موردی برای نمایش وجود ندارد</td></tr>';
 
-let front_menu_loading = `
-<tr class="has_menus">
+let menu_item_loading = `
+<tr class="has_menu_items">
      <td class="text-center" colspan="5">
           <div class="d-flex justify-content-center">
                 <div class="my-4">
@@ -20,28 +20,28 @@ let front_menu_loading = `
 `;
 
 (function() {
-    load_front_menu(false);
+    load_menu_item(false);
 })();
 
 // start load menus from database
-function load_front_menu(empty_table) {
-    const site_menus_table = $('#site_menus_table tbody');
+function load_menu_item(empty_table) {
+    const menu_items_table = $('#menu_items_table tbody');
     if (empty_table == true){
-        site_menus_table.html(front_menu_loading);
+        menu_items_table.html(menu_item_loading);
     }
     $.ajax({
         type: "post",
-        url: baseUrl + '/panel/front-menu/get/menus/' + menu_group,
+        url: baseUrl + '/panel/menu-item/get/menu-items/' + menu,
         dataType: 'json',
         success: function (response) {
-            site_menus_table.find('.has_menus').hide(1000);
+            menu_items_table.find('.has_menu_items').hide(1000);
             setTimeout(function (){
                 if (response.length > 0){
                     for( let i=0; i<response.length; i++ ){
-                        add_menu_row( $('#site_menus_table tbody'), response[i].title, response[i].status_label, response[i].id );
+                        add_menu_item_row( $('#menu_items_table tbody'), response[i].title, response[i].status_label, response[i].id );
                     }
                 }else {
-                    site_menus_table.append(not_information);
+                    menu_items_table.append(not_information);
                 }
             }, 1000);
         }
@@ -50,16 +50,15 @@ function load_front_menu(empty_table) {
 // end load menus from database
 
 // start add menus row after insert menus in ajax
-function add_menu_row( target, menu_title, menu_status, menu_id ){
+function add_menu_item_row( target, menu_title, menu_status, menu_id ){
     target.append(
         "<tr class='list_row'>" +
-        "<td>" + menu_id + " <input type='hidden' name='menu_ids[]' value='" + menu_id + "'></td>" +
+        "<td>" + menu_id + " <input type='hidden' name='menu_item_ids[]' value='" + menu_id + "'></td>" +
         "<td>" + menu_title + " </td>" +
         "<td>" + menu_status + "</td>" +
         "<td>" +
-        "<a href='#' data-id='"+menu_id+"' class='btn btn-sm btn-success edit_menu'>ویرایش</a>" +
-        "<a href='/panel/menu-item/"+menu_id+"/edit' class='btn btn-sm btn-warning ml-lg-1' target='_blank'>آیتم ها</a>" +
-        "<a href='#' data-id='"+menu_id+"' class='btn btn-sm btn-danger delete_menu ml-lg-1'>حذف</a>" +
+        "<a href='#' data-id='"+menu_id+"' class='btn btn-sm btn-success edit_menu_item'>ویرایش</a>" +
+        "<a href='#' data-id='"+menu_id+"' class='btn btn-sm btn-danger delete_menu_item ml-lg-1'>حذف</a>" +
         "</td>" +
         "</tr>"
     );
@@ -67,7 +66,7 @@ function add_menu_row( target, menu_title, menu_status, menu_id ){
 // end add menus row after insert menus in ajax
 
 // start delete menu action
-$('#site_menus_table').on('click', '.delete_menu', function (e) {
+$('#menu_items_table').on('click', '.delete_menu_item', function (e) {
     e.preventDefault();
 
     const target = $(this);
@@ -94,7 +93,7 @@ $('#site_menus_table').on('click', '.delete_menu', function (e) {
         if (result.isConfirmed) {
             $.ajax({
                 type: "delete",
-                url: baseUrl + '/panel/front-menu/' + id,
+                url: baseUrl + '/panel/menu-item/' + id,
                 dataType: 'json',
                 success: function (response) {
                     Swal.fire({
@@ -114,7 +113,7 @@ $('#site_menus_table').on('click', '.delete_menu', function (e) {
                     })
                         .then((response) => {
                             target.closest('tr').remove();
-                            hasMenu();
+                            hasMenuItem();
                         });
                 }
             });
@@ -126,47 +125,47 @@ $('#site_menus_table').on('click', '.delete_menu', function (e) {
 // end delete menu action
 
 // start check if has not field then show not found
-function hasMenu(){
+function hasMenuItem(){
     $.ajax({
         type: "post",
-        url: baseUrl + '/panel/front-menu/get/menus/' + menu_group,
+        url: baseUrl + '/panel/menu-item/get/menu-items/' + menu,
         dataType: 'json',
         success: function (response) {
             if (!response.length > 0){
-                $('#site_menus_table tbody').append(not_information);
+                $('#menu_items_table tbody').append(not_information);
             }
         }
     });
 }
 // end check if has not field then show not found
 
-$('.new_menu').on('click', function (e) {
+$('.new_menu_item').on('click', function (e) {
     empty_inputs();
     hide_error_messages();
 });
 
 // start add new menu ajax handler
-$('.add_menu').on('click', function(e) {
+$('.add_menu_item').on('click', function(e) {
     e.preventDefault();
-    let menu_id = $('.menu_id').val();
+    let menu_item_id = $('.menu_item_id').val();
     let modal_id = $(this).data('modal');
     $.ajax({
         type: 'patch',
-        url: baseUrl + '/panel/front-menu/createOrUpdate/' + menu_group,
-        data: $('#menu_data :input').serialize(),
+        url: baseUrl + '/panel/menu-item/createOrUpdate/' + menu,
+        data: $('#menu_item_data :input').serialize(),
         dataType: 'json',
         success: function (response) {
             $('.not_information').hide();
             $('.has_information').hide();
             if (menu_id == 0){
-                add_menu_row($('#site_menus_table tbody'), response.title, response.status_label, response.id);
+                add_menu_item_row($('#menu_items_table tbody'), response.title, response.status_label, response.id);
                 empty_inputs();
             }else {
                 hide_error_messages();
                 if (response.status == 500){
                     show_error_message(modal_id,response.message);
                 }else {
-                    load_front_menu(true);
+                    load_menu_item(true);
                     show_success_message(modal_id,response.message);
                 }
             }
@@ -180,7 +179,7 @@ $('.add_menu').on('click', function(e) {
 
 //start empty inputs
 function empty_inputs(){
-    $('#menu_data :input').val('');
+    $('#menu_item_data :input').val('');
     $(".menu_status").val(0);
     $(".menu_status").trigger('change');
 }
@@ -255,7 +254,7 @@ function show_error_messages(res){
 // end show error messages for ajax menu
 
 // start menus table sort method
-let menus_table = $("#site_menus_table tbody");
+let menus_table = $("#menu_items_table tbody");
 var fixHelperModified = function(e, tr) {
     var $originals = tr.children();
     var $helper = tr.clone();
@@ -266,14 +265,14 @@ var fixHelperModified = function(e, tr) {
 };
 updateIndex = function() {
     let menus = [];
-    $('input[name^="menu_ids"]').each(function(i) {
+    $('input[name^="menu_item_ids"]').each(function(i) {
         if ( ! $(this).val() == '' ){
             menus[i] = $(this).val();
         }
     });
     $.ajax({
         type: 'post',
-        url: baseUrl + '/panel/front-menu/sort',
+        url: baseUrl + '/panel/menu-item/sort',
         data: {
             menu_ids : menus
         },
@@ -302,12 +301,12 @@ menus_table.sortable({
 // end menus table sort method
 
 // start edit menu action
-$('#site_menus_table').on('click', '.edit_menu', function (e) {
+$('#menu_items_table').on('click', '.edit_menu_item', function (e) {
     e.preventDefault();
     let menu = $(this).data('id');
     $.ajax({
         type: 'post',
-        url: baseUrl + '/panel/front-menu/get/menu',
+        url: baseUrl + '/panel/menu-item/get/menu-item',
         data: {
             menu_id : menu
         },
@@ -315,12 +314,12 @@ $('#site_menus_table').on('click', '.edit_menu', function (e) {
         success: function (response) {
             empty_inputs();
             hide_error_messages();
-            $('#menu_item').modal('show');
+            $('#menu_item_modal').modal('show');
             $('#title').val(response.title);
             $('#css_class').val(response.css_class);
             $(".menu_status").val(response.menu_status);
             $(".menu_status").trigger('change');
-            $('.menu_id').val(response.menu_id);
+            $('.menu_item_id').val(response.menu_id);
         },
         error: function (response) {
             alertify.error("یک خطا غیرمنتظره رخ داد !");
