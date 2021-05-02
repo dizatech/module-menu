@@ -103,4 +103,14 @@ class MenuRepository
     {
         return MenuItem::query()->findOrFail($menu_item_id);
     }
+
+    public function findItemTypes($search)
+    {
+//        return test::query()
+//            ->where(function ($query) use ($search){
+//                $query->whereRaw("concat_ws('',test,tset) like ?", ['%' . $search . '%']);
+//                $query->orWhere('test', 'like', ['%' . $search . '%']);
+//            })
+//            ->get();
+    }
 }

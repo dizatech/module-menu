@@ -141,4 +141,24 @@ class MenuItemController extends Controller
             'menu_id' => $menu->id
         ));
     }
+
+    public function getMenuTypes()
+    {
+        $users = array();
+        if (request()->has('q')){
+            if (!empty(request('q')) || request('q') != null){
+                $types = MenusFacade::findItemTypes(request('q'));
+            }
+        }
+        $results = [];
+        foreach ($types as $type) {
+            $temp = new \stdClass();
+            $temp->id = $type->id;
+            $temp->text = $type->title;
+            $results[] = $temp;
+        }
+        $output = new \stdClass();
+        $output->results = $results;
+        return json_encode($output);
+    }
 }
