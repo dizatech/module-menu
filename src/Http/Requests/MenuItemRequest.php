@@ -26,7 +26,10 @@ class MenuItemRequest extends FormRequest
         return [
             'title' => ['required','string','max:255'],
             'css_class' => ['string','max:255'],
-            'menu_status' => ['required','in:0,1'],
+            'status' => ['required','in:0,1'],
+            'type' => ['string', 'in:custom,heading,news,news_category,article,article_category,
+            video,video_category,service,service_category,laboratory,equipment'],
+            'parent_id' => ['integer']
         ];
     }
 
