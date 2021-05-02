@@ -19,40 +19,40 @@
                                         <option value="">
                                             انتخاب کنید...
                                         </option>
-                                        <option value="custom">
+                                        <option value="custom" title="منو سفارشی">
                                             منو سفارشی
                                         </option>
-                                        <option value="heading">
+                                        <option value="heading" title="تیتر منو">
                                             تیتر منو
                                         </option>
-                                        <option value="news">
+                                        <option value="news" title="خبر">
                                             خبر
                                         </option>
-                                        <option value="news_category">
+                                        <option value="news_category" title="دسته‌بندی خبر">
                                             دسته‌بندی خبر
                                         </option>
-                                        <option value="article">
+                                        <option value="article" title="مقاله">
                                             مقاله
                                         </option>
-                                        <option value="article_category">
+                                        <option value="article_category" title="دسته‌بندی مقاله">
                                             دسته‌بندی مقاله
                                         </option>
-                                        <option value="video">
+                                        <option value="video" title="ویدیو">
                                             ویدیو
                                         </option>
-                                        <option value="video_category">
+                                        <option value="video_category" title="دسته‌بندی ویدیو">
                                             دسته‌بندی ویدیو
                                         </option>
-                                        <option value="service">
+                                        <option value="service" title="خدمت">
                                             خدمت
                                         </option>
-                                        <option value="service_category">
+                                        <option value="service_category" title="دسته‌بندی خدمت">
                                             دسته‌بندی خدمت
                                         </option>
-                                        <option value="laboratory">
+                                        <option value="laboratory" title="آزمایشگاه">
                                             آزمایشگاه
                                         </option>
-                                        <option value="equipment">
+                                        <option value="equipment" title="تجهیزات">
                                             تجهیزات
                                         </option>
                                     </select>
@@ -116,6 +116,17 @@
                                     <span class="invalid-feedback d-none" role="alert">
                                         <strong></strong>
                                     </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 item_type_container" style="display: none">
+                                <div class="form-group">
+                                    <span class="text-danger">*</span>
+                                    <label for="item_type" class="item_type_title"></label>
+                                    <select name="item_type" id="item_type"
+                                            class="form-control item_type">
+                                    </select>
                                 </div>
                             </div>
                         </div>

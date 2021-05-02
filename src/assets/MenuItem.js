@@ -344,6 +344,16 @@ $('.type').on('change', function () {
             break;
         default:
             $('.item_title').show('.5');
+            $(".item_type_title").html('<stronge>' + $(this).attr('title') + '</stronge>');
+            $(".item_type").select2({
+                theme: "bootstrap",
+                minimumInputLength: 3,
+                ajax: {
+                    url: baseUrl + '/panel/menu-item/get/menu-types',
+                    dataType: 'json'
+                }
+            });
+            $('.item_type_container').show('.5');
             $('.item_url').hide('.5');
     }
 });
