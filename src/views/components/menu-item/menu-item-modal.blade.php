@@ -100,7 +100,7 @@
                         <div class="row">
                             <div class="col-md-6 item_title" style="display: none">
                                 <div class="form-group">
-                                    <span class="text-danger">*</span>
+                                    <span class="text-danger title_required"></span>
                                     <label for="title"><strong>عنوان</strong></label>
                                     <input type='text' id='title' class='form-control' name='title' value='' />
                                     <span class="invalid-feedback d-none" role="alert">
@@ -118,8 +118,6 @@
                                     </span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6 item_type_container" style="display: none">
                                 <div class="form-group">
                                     <span class="text-danger">*</span>

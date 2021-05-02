@@ -333,18 +333,24 @@ $('.type').on('change', function () {
         case 'custom':
             $('.item_title').show('.5');
             $('.item_url').show('.5');
+            $('.item_type_container').hide('.5');
+            $('.title_required').html('*');
             break;
         case 'heading':
             $('.item_title').show('.5');
             $('.item_url').hide('.5');
+            $('.item_type_container').hide('.5');
+            $('.title_required').html('*');
             break;
         case '':
             $('.item_title').hide('.5');
             $('.item_url').hide('.5');
+            $('.item_type_container').hide('.5');
             break;
         default:
+            $('.title_required').html('');
             $('.item_title').show('.5');
-            $(".item_type_title").html('<stronge>' + $(this).attr('title') + '</stronge>');
+            $(".item_type_title").html('<strong>' + 'انتخاب ' + $(this).find("option:selected").attr("title") + '</strong>');
             $(".item_type").select2({
                 theme: "bootstrap",
                 minimumInputLength: 3,
