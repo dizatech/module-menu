@@ -135,6 +135,7 @@ class MenuRepository
     public function findService($search)
     {
         return Service::query()
+            ->where('publish_status', '=', 'published')
             ->where(function ($query) use ($search){
                 $query->where("title", 'like', ['%' . $search . '%']);
                 $query->orWhere("slug", 'like', ['%' . $search . '%']);
@@ -145,6 +146,7 @@ class MenuRepository
     public function findLaboratory($search)
     {
         return Laboratory::query()
+            ->where('publish_status', '=', 'published')
             ->where(function ($query) use ($search){
                 $query->where("title", 'like', ['%' . $search . '%']);
                 $query->orWhere("slug", 'like', ['%' . $search . '%']);
@@ -155,6 +157,7 @@ class MenuRepository
     public function findEquipment($search)
     {
         return Equipment::query()
+            ->where('publish_status', '=', 'published')
             ->where(function ($query) use ($search){
                 $query->where("title", 'like', ['%' . $search . '%']);
                 $query->orWhere("slug", 'like', ['%' . $search . '%']);
