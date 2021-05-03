@@ -29,6 +29,6 @@ Route::group([
         Route::patch('/createOrUpdate/{MenuItem}', 'MenuItemController@createOrUpdate');
         Route::post('/sort', 'MenuItemController@sortMenuItem');
         Route::post('/get/menu-item', 'MenuItemController@getMenuItem');
-        Route::post('/get/menu-types', 'MenuItemController@getMenuTypes');
+        Route::get('/get/menu-types/{type}', 'MenuItemController@getMenuTypes');
     });
 });

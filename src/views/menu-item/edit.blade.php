@@ -91,7 +91,7 @@
 
     @slot('script')
         <script>
-            $(".menu_status").select2({
+            $(".status").select2({
                 theme: "bootstrap"
             });
             $(".type").select2({

@@ -20,7 +20,9 @@ let front_menu_loading = `
 `;
 
 (function() {
-    load_front_menu(false);
+    if (typeof menu_group != "undefined"){
+        load_front_menu(false);
+    }
 })();
 
 // start load menus from database

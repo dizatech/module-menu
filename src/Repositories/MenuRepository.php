@@ -1,8 +1,13 @@
 <?php
 namespace Dizatech\ModuleMenu\Repositories;
 
+use App\Models\Category;
 use Dizatech\ModuleMenu\Models\Menu;
 use Dizatech\ModuleMenu\Models\MenuItem;
+use Modules\MahamaxCore\Models\Equipment;
+use Modules\MahamaxCore\Models\Laboratory;
+use Modules\MahamaxCore\Models\Service;
+use Modules\Post\Models\Post;
 
 class MenuRepository
 {
@@ -104,13 +109,56 @@ class MenuRepository
         return MenuItem::query()->findOrFail($menu_item_id);
     }
 
-    public function findItemTypes($search)
+    public function findPost($search, $type)
     {
-//        return test::query()
-//            ->where(function ($query) use ($search){
-//                $query->whereRaw("concat_ws('',test,tset) like ?", ['%' . $search . '%']);
-//                $query->orWhere('test', 'like', ['%' . $search . '%']);
-//            })
-//            ->get();
+        return Post::query()
+            ->where('post_type', '=', $type)
+            ->where(function ($query) use ($search){
+                $query->where("title", 'like', ['%' . $search . '%']);
+                $query->orWhere("sub_title", 'like', ['%' . $search . '%']);
+                $query->orWhere("slug", 'like', ['%' . $search . '%']);
+            })
+            ->get();
+    }
+
+    public function findCategory($search, $type)
+    {
+        return Category::query()
+            ->where('category_type', '=', $type)
+            ->where(function ($query) use ($search){
+                $query->where("title", 'like', ['%' . $search . '%']);
+                $query->orWhere("slug", 'like', ['%' . $search . '%']);
+            })
+            ->get();
+    }
+
+    public function findService($search)
+    {
+        return Service::query()
+            ->where(function ($query) use ($search){
+                $query->where("title", 'like', ['%' . $search . '%']);
+                $query->orWhere("slug", 'like', ['%' . $search . '%']);
+            })
+            ->get();
+    }
+
+    public function findLaboratory($search)
+    {
+        return Laboratory::query()
+            ->where(function ($query) use ($search){
+                $query->where("title", 'like', ['%' . $search . '%']);
+                $query->orWhere("slug", 'like', ['%' . $search . '%']);
+            })
+            ->get();
+    }
+
+    public function findEquipment($search)
+    {
+        return Equipment::query()
+            ->where(function ($query) use ($search){
+                $query->where("title", 'like', ['%' . $search . '%']);
+                $query->orWhere("slug", 'like', ['%' . $search . '%']);
+            })
+            ->get();
     }
 }

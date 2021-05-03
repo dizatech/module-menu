@@ -20,7 +20,9 @@ let menu_item_loading = `
 `;
 
 (function() {
-    load_menu_item(false);
+    if (typeof menu != "undefined"){
+        load_menu_item(false);
+    }
 })();
 
 // start load menus from database
@@ -355,7 +357,7 @@ $('.type').on('change', function () {
                 theme: "bootstrap",
                 minimumInputLength: 3,
                 ajax: {
-                    url: baseUrl + '/panel/menu-item/get/menu-types',
+                    url: baseUrl + '/panel/menu-item/get/menu-types/' + $(this).val(),
                     dataType: 'json'
                 }
             });
