@@ -143,7 +143,13 @@ function hasMenuItem(){
 
 $('.new_menu_item').on('click', function (e) {
     empty_inputs();
-    hide_error_messages();
+    $.ajax({
+        url: baseUrl + '/panel/menu-item/get/menu-parents',
+        dataType: 'json',
+        success: function (response) {
+            $('.parent_id').html(response.menu_parent);
+        }
+    });
 });
 
 // start add new menu ajax handler
@@ -173,6 +179,7 @@ $('.add_menu_item').on('click', function(e) {
             }
         },
         error: function (response) {
+            hide_error_messages();
             show_error_messages(response);
         }
     });
@@ -198,7 +205,9 @@ function hide_error_messages(){
     $('.form-group')
         .find('.is-invalid')
         .removeClass('is-invalid');
-    $(".menu_status").trigger('change');
+    $(".status").trigger('change');
+    $('.form-group').find('.select2-hidden-accessible').next().find('.select2-selection').removeClass('is-invalid-select2');
+    $('.form-group').find('.select2-hidden-accessible').next().find('+ span').remove();
 }
 // end hide menu error messages before and after ajax submit
 
@@ -249,6 +258,10 @@ function show_error_messages(res){
                     .find('.invalid-feedback')
                     .removeClass('d-none')
                     .find('strong').text(response.responseJSON.errors[field_name]);
+                if (target.hasClass('select2-hidden-accessible')){
+                    target.next().find('.select2-selection').addClass('is-invalid-select2');
+                    target.next().after('<span class="invalid-feedback d-block" role="alert"><strong>'+response.responseJSON.errors[field_name]+'</strong></span>');
+                }
             }
         }
     }

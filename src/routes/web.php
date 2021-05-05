@@ -30,5 +30,6 @@ Route::group([
         Route::post('/sort', 'MenuItemController@sortMenuItem');
         Route::post('/get/menu-item', 'MenuItemController@getMenuItem');
         Route::get('/get/menu-types/{type}', 'MenuItemController@getMenuTypes');
+        Route::get('/get/menu-parents', 'MenuItemController@getMenuParents');
     });
 });

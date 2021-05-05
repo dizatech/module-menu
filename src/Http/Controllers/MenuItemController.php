@@ -3,6 +3,7 @@
 namespace Dizatech\ModuleMenu\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Dizatech\ModuleMenu\Facades\MenuParentFacade;
 use Dizatech\ModuleMenu\Facades\MenusFacade;
 use Dizatech\ModuleMenu\Http\Requests\FrontMenuRequest;
 use Dizatech\ModuleMenu\Http\Requests\MenuItemRequest;
@@ -191,12 +192,14 @@ class MenuItemController extends Controller
         return json_encode($output);
     }
 
-    public function getMenuParent()
+    public function getMenuParents()
     {
-//        '<x-menu-parent page="edit"
-//            parent="{{ $menu_item->parent_id }}"
-//            category="{{ $menu_item->id }}">
-//        </x-menu-parent>';
-        return '<x-menu-parent page="create"></x-menu-parent>';
+        //MenuParentFacade::menu_item_select_options($this->menu_items(), old('parent_id', $this->parent_id), $this->menu_item_id);
+        $menuItem = MenuItem::query()->where('parent_id', 0)
+            ->get();
+        return json_encode(array(
+            'status' => '200',
+            'menu_parent' => MenuParentFacade::menu_item_select_options($menuItem)
+        ));
     }
 }

@@ -11,6 +11,8 @@ class MenuItem extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['menu_id','parent_id','title','url','type','css_class','status','sort_order'];
+
     public function menu()
     {
         return $this->belongsTo(Menu::class);

@@ -24,10 +24,10 @@ class MenuItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required','string','max:255'],
-            'css_class' => ['string','max:255'],
+            'title' => ['nullable','string','max:255'],
+            'css_class' => ['nullable','string','max:255'],
             'status' => ['required','in:0,1'],
-            'type' => ['string', 'in:custom,heading,news,news_category,article,article_category,
+            'type' => ['required', 'in:custom,heading,news,news_category,article,article_category,
             video,video_category,service,service_category,laboratory,equipment'],
             'parent_id' => ['integer']
         ];
@@ -36,8 +36,7 @@ class MenuItemRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'فیلد عنوان الزامی است.',
-            'menu_status.required' => 'فیلد وضعیت الزامی است.',
+            'status.required' => 'فیلد وضعیت الزامی است.',
             'css_class.string' => 'فیلد کلاس css معتبر نیست.',
         ];
     }
