@@ -90,9 +90,7 @@
                                     <label for="parent_id"><strong>والد</strong></label>
                                     <select name="parent_id" id="parent_id"
                                             class="form-control parent_id">
-                                        <option value="0" selected>
-                                            test
-                                        </option>
+
                                     </select>
                                 </div>
                             </div>

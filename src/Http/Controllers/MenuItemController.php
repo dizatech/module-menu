@@ -190,4 +190,13 @@ class MenuItemController extends Controller
         $output->results = $results;
         return json_encode($output);
     }
+
+    public function getMenuParent()
+    {
+//        '<x-menu-parent page="edit"
+//            parent="{{ $menu_item->parent_id }}"
+//            category="{{ $menu_item->id }}">
+//        </x-menu-parent>';
+        return '<x-menu-parent page="create"></x-menu-parent>';
+    }
 }
