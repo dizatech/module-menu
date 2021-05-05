@@ -112,18 +112,18 @@
                                 <div class="form-group">
                                     <span class="text-danger">*</span>
                                     <label for="url"><strong>url</strong></label>
-                                    <input type='text' id='url' class='form-control' name='url' value='' />
+                                    <input type='text' id='url' class='form-control' name='url' value='' style="direction: ltr" />
                                     <span class="invalid-feedback d-none" role="alert">
                                         <strong></strong>
                                     </span>
                                 </div>
                             </div>
-                            <div class="col-md-6 item_type_container" style="display: none">
+                            <div class="col-md-6 object_container" style="display: none">
                                 <div class="form-group">
                                     <span class="text-danger">*</span>
-                                    <label for="item_type" class="item_type_title"></label>
-                                    <select name="item_type" id="item_type"
-                                            class="form-control item_type">
+                                    <label for="object_id" class="object_title"></label>
+                                    <select name="object_id" id="object_id"
+                                            class="form-control object_id">
                                     </select>
                                 </div>
                             </div>

@@ -4,6 +4,7 @@ namespace Dizatech\ModuleMenu\Repositories;
 use App\Models\Category;
 use Dizatech\ModuleMenu\Models\Menu;
 use Dizatech\ModuleMenu\Models\MenuItem;
+use Illuminate\Routing\Route;
 use Modules\MahamaxCore\Models\Equipment;
 use Modules\MahamaxCore\Models\Laboratory;
 use Modules\MahamaxCore\Models\Service;
@@ -60,15 +61,61 @@ class MenuRepository
         return Menu::query()->findOrFail($menu_id);
     }
 
-    public function createMenuItem($request,$menu)
+    public function urlGenerator($object_id, $object_type, $object)
     {
+        $route_name = '';
+        switch ($object_type){
+            case 'news':
+                $route_name = 'news.user_show';
+                break;
+            case 'news_category':
+                $route_name = 'news_category.user_show';
+                break;
+            case 'article':
+                $route_name = 'article.user_show';
+                break;
+            case 'article_category':
+                $route_name = 'article_category.user_show';
+                break;
+            case 'video':
+                $route_name = 'video.user_show';
+                break;
+            case 'service':
+                $route_name = 'service.user_show';
+                break;
+            case 'equipment':
+                $route_name = 'equipment.user_show';
+                break;
+            case 'laboratory':
+                $route_name = 'laboratory.user_show';
+                break;
+        }
+        return Route($route_name, $object->slug);
+    }
+
+    public function createMenuItem($request,$menu,$parent_menu)
+    {
+        if ($request->type != 'heading' && $request->type != 'custom'){
+            $object = $this->getObject($request->type, null, $request->object_id);
+            $url = $this->urlGenerator($request->object_id,$request->type, $object);
+            if (is_null($request->title)){
+                $title = $object->slug;
+            }
+        }else{
+            $url = $request->url;
+            $title = $request->title;
+        }
         $menu_item = MenuItem::query()->create([
-            'title' => $request->title,
+            'title' => $title,
             'css_class' => $request->css_class,
-            'status' => $request->menu_status,
+            'menu_status' => $request->menu_status,
+            'menu_id' => $parent_menu->id,
+            'parent_id' => $request->parent_id,
+            'object_id' => $request->object_id,
+            'url' => $url,
+            'type' => $request->type,
             'sort_order' => $this->getMenuItemSortOrder($menu)
         ]);
-        $menu->menu_items()->attach($menu_item);
         return $menu_item;
     }
 
@@ -109,59 +156,114 @@ class MenuRepository
         return MenuItem::query()->findOrFail($menu_item_id);
     }
 
-    public function findPost($search, $type)
+    public function findPost($search = null, $type, $object_id = null)
     {
-        return Post::query()
-            ->where('post_type', '=', $type)
-            ->where(function ($query) use ($search){
-                $query->where("title", 'like', ['%' . $search . '%']);
-                $query->orWhere("sub_title", 'like', ['%' . $search . '%']);
-                $query->orWhere("slug", 'like', ['%' . $search . '%']);
-            })
-            ->get();
+        if ($object_id == null){
+            return Post::query()
+                ->where('post_type', '=', $type)
+                ->where(function ($query) use ($search){
+                    $query->where("title", 'like', ['%' . $search . '%']);
+                    $query->orWhere("sub_title", 'like', ['%' . $search . '%']);
+                    $query->orWhere("slug", 'like', ['%' . $search . '%']);
+                })
+                ->get();
+        }else{
+            return Post::query()->findOrFail($object_id);
+        }
     }
 
-    public function findCategory($search, $type)
+    public function findCategory($search = null, $type, $object_id = null)
     {
-        return Category::query()
-            ->where('category_type', '=', $type)
-            ->where(function ($query) use ($search){
-                $query->where("title", 'like', ['%' . $search . '%']);
-                $query->orWhere("slug", 'like', ['%' . $search . '%']);
-            })
-            ->get();
+        if ($object_id == null){
+            return Category::query()
+                ->where('category_type', '=', $type)
+                ->where(function ($query) use ($search){
+                    $query->where("title", 'like', ['%' . $search . '%']);
+                    $query->orWhere("slug", 'like', ['%' . $search . '%']);
+                })
+                ->get();
+        }else{
+            return Category::query()->findOrFail($object_id);
+        }
     }
 
-    public function findService($search)
+    public function findService($search = null, $object_id = null)
     {
-        return Service::query()
-            ->where('publish_status', '=', 'published')
-            ->where(function ($query) use ($search){
-                $query->where("title", 'like', ['%' . $search . '%']);
-                $query->orWhere("slug", 'like', ['%' . $search . '%']);
-            })
-            ->get();
+        if ($object_id == null){
+            return Service::query()
+                ->where('publish_status', '=', 'published')
+                ->where(function ($query) use ($search){
+                    $query->where("title", 'like', ['%' . $search . '%']);
+                    $query->orWhere("slug", 'like', ['%' . $search . '%']);
+                })
+                ->get();
+        }else{
+            return Service::query()->findOrFail($object_id);
+        }
+
     }
 
-    public function findLaboratory($search)
+    public function findLaboratory($search = null, $object_id = null)
     {
-        return Laboratory::query()
-            ->where('publish_status', '=', 'published')
-            ->where(function ($query) use ($search){
-                $query->where("title", 'like', ['%' . $search . '%']);
-                $query->orWhere("slug", 'like', ['%' . $search . '%']);
-            })
-            ->get();
+        if ($object_id == null){
+            return Laboratory::query()
+                ->where('publish_status', '=', 'published')
+                ->where(function ($query) use ($search){
+                    $query->where("title", 'like', ['%' . $search . '%']);
+                    $query->orWhere("slug", 'like', ['%' . $search . '%']);
+                })
+                ->get();
+        }else{
+            return Laboratory::query()->findOrFail($object_id);
+        }
     }
 
-    public function findEquipment($search)
+    public function findEquipment($search = null, $object_id = null)
     {
-        return Equipment::query()
-            ->where('publish_status', '=', 'published')
-            ->where(function ($query) use ($search){
-                $query->where("title", 'like', ['%' . $search . '%']);
-                $query->orWhere("slug", 'like', ['%' . $search . '%']);
-            })
-            ->get();
+        if ($object_id == null){
+            return Equipment::query()
+                ->where('publish_status', '=', 'published')
+                ->where(function ($query) use ($search){
+                    $query->where("title", 'like', ['%' . $search . '%']);
+                    $query->orWhere("slug", 'like', ['%' . $search . '%']);
+                })
+                ->get();
+        }else{
+            return Equipment::query()->findOrFail($object_id);
+        }
+    }
+
+    public function getObject($type,$search_query = null,$object_id = null)
+    {
+        switch ($type){
+            case 'news':
+                $object = $this->findPost($search_query, 'news', $object_id);
+                break;
+            case 'news_category':
+                $object = $this->findCategory($search_query, 'newsCategory', $object_id);
+                break;
+            case 'article':
+                $object = $this->findPost($search_query, 'article', $object_id);
+                break;
+            case 'article_category':
+                $object = $this->findCategory($search_query, 'articleCategory', $object_id);
+                break;
+            case 'video':
+                $object = $this->findPost($search_query, 'video', $object_id);
+                break;
+            case 'service':
+                $object = $this->findService($search_query, $object_id);
+                break;
+//            case 'service_category':
+//                $object = $this->findCategory($search_query, 'serviceCategory', $object_id);
+//                break;
+            case 'equipment':
+                $object = $this->findEquipment($search_query, $object_id);
+                break;
+            case 'laboratory':
+                $object = $this->findLaboratory($search_query, $object_id);
+                break;
+        }
+        return $object;
     }
 }

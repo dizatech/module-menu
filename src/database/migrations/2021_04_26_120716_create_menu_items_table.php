@@ -17,6 +17,7 @@ class CreateMenuItemsTable extends Migration
             $table->id();
             $table->bigInteger('menu_id');
             $table->bigInteger('parent_id');
+            $table->bigInteger('object_id');
             $table->string('title');
             $table->text('url');
             $table->string('type');

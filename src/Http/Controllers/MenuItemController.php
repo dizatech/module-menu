@@ -81,8 +81,9 @@ class MenuItemController extends Controller
         $response = json_encode(array(
             'status' => '500'
         ));
+        $parent_menu = $MenuItem;
         if (is_null($request->menu_id)){
-            $menu = MenusFacade::createMenuItem($request,$MenuItem);
+            $menu = MenusFacade::createMenuItem($request,$MenuItem,$parent_menu);
             $response = json_encode(array(
                 'status' => '200',
                 'id' => $menu->id,
@@ -143,47 +144,16 @@ class MenuItemController extends Controller
         ));
     }
 
-    public function getMenuTypes($type)
+    public function getMenuObjects($type)
     {
         if (request()->has('q') && (!empty(request('q')) || request('q') != null)){
-            switch ($type){
-                case 'news':
-                    $item_refs = MenusFacade::findPost(request('q'), 'news');
-                    break;
-                case 'news_category':
-                    $item_refs = MenusFacade::findCategory(request('q'), 'newsCategory');
-                    break;
-                case 'article':
-                    $item_refs = MenusFacade::findPost(request('q'), 'article');
-                    break;
-                case 'article_category':
-                    $item_refs = MenusFacade::findCategory(request('q'), 'articleCategory');
-                    break;
-                case 'video':
-                    $item_refs = MenusFacade::findPost(request('q'), 'video');
-                    break;
-                case 'video_category':
-                    $item_refs = MenusFacade::findCategory(request('q'), 'videoCategory');
-                    break;
-                case 'service':
-                    $item_refs = MenusFacade::findService(request('q'));
-                    break;
-                case 'service_category':
-                    $item_refs = MenusFacade::findCategory(request('q'), 'serviceCategory');
-                    break;
-                case 'equipment':
-                    $item_refs = MenusFacade::findEquipment(request('q'));
-                    break;
-                case 'laboratory':
-                    $item_refs = MenusFacade::findLaboratory(request('q'));
-                    break;
-            }
+            $objects = MenusFacade::getObject($type,request('q'));
         }
         $results = [];
-        foreach ($item_refs as $ref) {
+        foreach ($objects as $object) {
             $temp = new \stdClass();
-            $temp->id = $ref->id;
-            $temp->text = $ref->title;
+            $temp->id = $object->id;
+            $temp->text = $object->title;
             $results[] = $temp;
         }
         $output = new \stdClass();

@@ -52,7 +52,7 @@ class MenuItemRequest extends FormRequest
             [$this, 'checkIfTypeIsCustom']
         );
         $validator->sometimes(
-            'item_type',
+            'object_id',
             ['required', 'integer'],
             [$this, 'checkIfHasDynamicType']
         );
@@ -78,7 +78,7 @@ class MenuItemRequest extends FormRequest
     {
         return [
             'status.required' => 'فیلد وضعیت الزامی است.',
-            'item_type.required' => 'این فیلم الزامی است.',
+            'object_id.required' => 'این فیلد الزامی است.',
             'type.required' => 'فیلد نوع الزامی است.',
             'css_class.string' => 'فیلد کلاس css معتبر نیست.',
         ];

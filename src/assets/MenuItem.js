@@ -348,34 +348,34 @@ $('.type').on('change', function () {
         case 'custom':
             $('.item_title').show('.5');
             $('.item_url').show('.5');
-            $('.item_type_container').hide('.5');
+            $('.object_container').hide('.5');
             $('.title_required').html('*');
             break;
         case 'heading':
             $('.item_title').show('.5');
             $('.item_url').hide('.5');
-            $('.item_type_container').hide('.5');
+            $('.object_container').hide('.5');
             $('.title_required').html('*');
             break;
         case '':
             $('.item_title').hide('.5');
             $('.item_url').hide('.5');
-            $('.item_type_container').hide('.5');
+            $('.object_container').hide('.5');
             break;
         default:
             $('.title_required').html('');
             $('.item_title').show('.5');
-            $(".item_type_title").html('<strong>' + 'انتخاب ' + $(this).find("option:selected").attr("title") + '</strong>');
-            $(".item_type").select2({
+            $(".object_title").html('<strong>' + 'انتخاب ' + $(this).find("option:selected").attr("title") + '</strong>');
+            $(".object_id").select2({
                 theme: "bootstrap",
                 placeholder: "لطفا یک مورد را انتخاب کنید",
                 minimumInputLength: 3,
                 ajax: {
-                    url: baseUrl + '/panel/menu-item/get/menu-types/' + $(this).val(),
+                    url: baseUrl + '/panel/menu-item/get/menu-objects/' + $(this).val(),
                     dataType: 'json'
                 }
             });
-            $('.item_type_container').show('.5');
+            $('.object_container').show('.5');
             $('.item_url').hide('.5');
     }
 });
