@@ -78,11 +78,10 @@ class MenuItemController extends Controller
      */
     public function createOrUpdate(MenuItemRequest $request, Menu $MenuItem)
     {
-        dd($request->all());
         $response = json_encode(array(
             'status' => '500'
         ));
-        if ($request->menu_id == 0){
+        if (is_null($request->menu_id)){
             $menu = MenusFacade::createMenuItem($request,$MenuItem);
             $response = json_encode(array(
                 'status' => '200',

@@ -368,6 +368,7 @@ $('.type').on('change', function () {
             $(".item_type_title").html('<strong>' + 'انتخاب ' + $(this).find("option:selected").attr("title") + '</strong>');
             $(".item_type").select2({
                 theme: "bootstrap",
+                placeholder: "لطفا یک مورد را انتخاب کنید",
                 minimumInputLength: 3,
                 ajax: {
                     url: baseUrl + '/panel/menu-item/get/menu-types/' + $(this).val(),
