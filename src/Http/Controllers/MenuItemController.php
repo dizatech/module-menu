@@ -123,7 +123,7 @@ class MenuItemController extends Controller
         $request->validate([
             'menu_item_ids' => 'required'
         ]);
-        MenusFacade::sortMenuItems($request->menu_ids);
+        MenusFacade::sortMenuItems($request->menu_item_ids);
         return json_encode(array(
             'status' => '200'
         ));

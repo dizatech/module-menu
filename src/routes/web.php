@@ -27,7 +27,7 @@ Route::group([
     ], function () {
         Route::post('/get/menu-items/{MenuItem}', 'MenuItemController@getMenuItems');
         Route::patch('/createOrUpdate/{MenuItem}', 'MenuItemController@createOrUpdate');
-        Route::post('/sort', 'MenuItemController@sortMenuItem');
+        Route::post('/sort', 'MenuItemController@sortMenu');
         Route::post('/get/menu-item', 'MenuItemController@getMenuItem');
         Route::get('/get/menu-objects/{type}', 'MenuItemController@getMenuObjects');
         Route::get('/get/menu-parents', 'MenuItemController@getMenuParents');

@@ -291,7 +291,7 @@ updateIndex = function() {
         type: 'post',
         url: baseUrl + '/panel/menu-item/sort',
         data: {
-            menu_ids : menus
+            menu_item_ids : menus
         },
         dataType: 'json',
         success: function (response) {
