@@ -165,9 +165,10 @@ $('.add_menu_item').on('click', function(e) {
         success: function (response) {
             $('.not_information').hide();
             $('.has_information').hide();
-            if (menu_item_id == 0){
+            if (menu_item_id == 0 || typeof menu_item_id == 'undefined'){
                 add_menu_item_row($('#menu_items_table tbody'), response.title, response.status_label, response.id);
                 empty_inputs();
+                show_success_message(modal_id,response.message);
             }else {
                 hide_error_messages();
                 if (response.status == 500){
