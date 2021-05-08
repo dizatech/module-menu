@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- menu inputs must be placed in here -->
+
                         <input type="hidden" name="menu_item_id" value="0" class="menu_item_id">
                     </div>
 

@@ -93,26 +93,40 @@ class MenuRepository
         return Route($route_name, $object->slug);
     }
 
-    public function createMenuItem($request,$menu,$parent_menu)
+    public function prepareRequest($request)
     {
         if ($request->type != 'heading' && $request->type != 'custom'){
             $object = $this->getObject($request->type, null, $request->object_id);
             $url = $this->urlGenerator($request->object_id,$request->type, $object);
             if (is_null($request->title)){
                 $title = $object->slug;
+            }else{
+                $title = $request->title;
             }
+            $object_id = $request->object_id;
         }else{
             $url = $request->url;
             $title = $request->title;
+            $object_id = 0;
         }
-        $menu_item = MenuItem::query()->create([
+        return [
             'title' => $title,
+            'url' => $url,
+            'object_id' => $object_id
+        ];
+    }
+
+    public function createMenuItem($request,$menu,$parent_menu)
+    {
+        $prepared_request = $this->prepareRequest($request);
+        $menu_item = MenuItem::query()->create([
+            'title' => $prepared_request['title'],
             'css_class' => $request->css_class,
-            'menu_status' => $request->menu_status,
+            'status' => $request->status,
             'menu_id' => $parent_menu->id,
             'parent_id' => $request->parent_id,
-            'object_id' => $request->object_id,
-            'url' => $url,
+            'object_id' => $prepared_request['object_id'],
+            'url' => $prepared_request['url'],
             'type' => $request->type,
             'sort_order' => $this->getMenuItemSortOrder($menu)
         ]);
@@ -121,12 +135,17 @@ class MenuRepository
 
     public function updateMenuItem($request)
     {
+        $prepared_request = $this->prepareRequest($request);
         MenuItem::query()
             ->where('id', '=', $request->menu_item_id)
             ->update([
-                'title' => $request->title,
+                'title' => $prepared_request['title'],
                 'css_class' => $request->css_class,
-                'status' => $request->menu_status,
+                'status' => $request->status,
+                'parent_id' => $request->parent_id,
+                'object_id' => $prepared_request['object_id'],
+                'url' => $prepared_request['url'],
+                'type' => $request->type,
             ]);
     }
 

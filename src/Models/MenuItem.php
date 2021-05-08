@@ -13,6 +13,8 @@ class MenuItem extends Model
 
     protected $fillable = ['menu_id','parent_id','title','url','type','css_class','object_id','status','sort_order'];
 
+    protected $appends = ['status_label'];
+
     public function menu()
     {
         return $this->belongsTo(Menu::class);
@@ -25,5 +27,19 @@ class MenuItem extends Model
     public function parent()
     {
         return $this->belongsTo(MenuItem::class, 'parent_id' ,'id');
+    }
+
+    public function getStatusLabelattribute()
+    {
+        switch ($this->status){
+            case 0:
+                return 'غیرفعال';
+                break;
+            case 1:
+                return 'فعال';
+                break;
+            default:
+                return 'نامشخص';
+        }
     }
 }

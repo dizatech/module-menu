@@ -82,7 +82,7 @@ class MenuItemController extends Controller
             'status' => '500'
         ));
         $parent_menu = $MenuItem;
-        if (is_null($request->menu_id)){
+        if (is_null($request->menu_item_id)){
             $menu = MenusFacade::createMenuItem($request,$MenuItem,$parent_menu);
             $response = json_encode(array(
                 'status' => '200',
@@ -91,7 +91,7 @@ class MenuItemController extends Controller
                 'status_label' => $menu->status_label,
                 'message' => 'آیتم باموفقیت ثبت شد.',
             ));
-        }elseif ($request->menu_id > 0){
+        }elseif ($request->menu_item_id > 0){
             MenusFacade::updateMenuItem($request);
             $response = json_encode(array(
                 'status' => '200',
@@ -107,9 +107,9 @@ class MenuItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $FrontMenu)
+    public function destroy(MenuItem $MenuItem)
     {
-        $FrontMenu->delete();
+        $MenuItem->delete();
         return response()->json(['status' => 'با موفقیت حذف شد']);
     }
 
@@ -134,13 +134,24 @@ class MenuItemController extends Controller
         $request->validate([
             'menu_item_id' => 'required'
         ]);
-        $menu = MenusFacade::getMenuItem($request->menu_id);
+        $menu = MenusFacade::getMenuItem($request->menu_item_id);
+        if ($menu->object_id != 0){
+            $object = MenusFacade::getObject($menu->type,null,$menu->object_id);
+            $object_title = $object->title;
+        }else{
+            $object_title = '';
+        }
         return json_encode(array(
             'status' => '200',
             'title' => $menu->title,
             'css_class' => $menu->css_class,
-            'menu_status' => $menu->status,
-            'menu_id' => $menu->id
+            'status' => $menu->status,
+            'menu_id' => $menu->id,
+            'parent_id' => $menu->parent_id,
+            'object_id' => $menu->object_id,
+            'object_title' => $object_title,
+            'url' => $menu->url,
+            'type' => $menu->type,
         ));
     }
 
@@ -161,14 +172,17 @@ class MenuItemController extends Controller
         return json_encode($output);
     }
 
-    public function getMenuParents()
+    public function getMenuParents(Request $request)
     {
-        //MenuParentFacade::menu_item_select_options($this->menu_items(), old('parent_id', $this->parent_id), $this->menu_item_id);
-        $menuItem = MenuItem::query()->where('parent_id', 0)
-            ->get();
+        $menuItems = MenuItem::query()->where('parent_id', 0)->get();
+        if ($request->has('parent_id')){
+            $menu_parent = MenuParentFacade::menu_item_select_options($menuItems, $request->parent_id ,$request->menu_item_id);
+        }else{
+            $menu_parent = MenuParentFacade::menu_item_select_options($menuItems);
+        }
         return json_encode(array(
             'status' => '200',
-            'menu_parent' => MenuParentFacade::menu_item_select_options($menuItem)
+            'menu_parent' => $menu_parent
         ));
     }
 }

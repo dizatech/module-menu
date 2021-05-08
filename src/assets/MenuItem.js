@@ -147,7 +147,7 @@ $('.new_menu_item').on('click', function (e) {
         url: baseUrl + '/panel/menu-item/get/menu-parents',
         dataType: 'json',
         success: function (response) {
-            $('.parent_id').html(response.menu_parent);
+            $('.parent_id').html('<option value="0">--</option>' + response.menu_parent);
         }
     });
 });
@@ -155,7 +155,7 @@ $('.new_menu_item').on('click', function (e) {
 // start add new menu ajax handler
 $('.add_menu_item').on('click', function(e) {
     e.preventDefault();
-    let menu_item_id = $('.menu_item_id').val();
+    let menu_item_id = $('#menu_items_table').find('.menu_item_id').val();
     let modal_id = $(this).data('modal');
     $.ajax({
         type: 'patch',
@@ -165,7 +165,7 @@ $('.add_menu_item').on('click', function(e) {
         success: function (response) {
             $('.not_information').hide();
             $('.has_information').hide();
-            if (menu_id == 0){
+            if (menu_item_id == 0){
                 add_menu_item_row($('#menu_items_table tbody'), response.title, response.status_label, response.id);
                 empty_inputs();
             }else {
@@ -189,8 +189,10 @@ $('.add_menu_item').on('click', function(e) {
 //start empty inputs
 function empty_inputs(){
     $('#menu_item_data :input').val('');
-    $(".menu_status").val(0);
-    $(".menu_status").trigger('change');
+    $(".status").val(0);
+    $(".status").trigger('change');
+    $(".parent_id").val(0);
+    $(".parent_id").trigger('change');
 }
 //end empty inputs
 
@@ -318,12 +320,12 @@ menus_table.sortable({
 // start edit menu action
 $('#menu_items_table').on('click', '.edit_menu_item', function (e) {
     e.preventDefault();
-    let menu = $(this).data('id');
+    let menu_id = $(this).data('id');
     $.ajax({
         type: 'post',
         url: baseUrl + '/panel/menu-item/get/menu-item',
         data: {
-            menu_id : menu
+            menu_item_id : menu_id
         },
         dataType: 'json',
         success: function (response) {
@@ -331,10 +333,30 @@ $('#menu_items_table').on('click', '.edit_menu_item', function (e) {
             hide_error_messages();
             $('#menu_item_modal').modal('show');
             $('#title').val(response.title);
+            $('#url').val(response.url);
             $('#css_class').val(response.css_class);
-            $(".menu_status").val(response.menu_status);
-            $(".menu_status").trigger('change');
+            $(".status").val(response.status);
+            $(".status").trigger('change');
             $('.menu_item_id').val(response.menu_id);
+            $('.type').val(response.type);
+            $(".type").trigger('change');
+            $.ajax({
+                url: baseUrl + '/panel/menu-item/get/menu-parents',
+                dataType: 'json',
+                data: {
+                    menu_item_id: menu_id,
+                    parent_id: response.parent_id
+                },
+                success: function (res) {
+                    $('.parent_id').html('<option value="0">--</option>' + res.menu_parent);
+                    $('.parent_id').val(response.parent_id).trigger('change');
+                }
+            });
+            var selectedObject = response.object_title;
+            if (selectedObject != ''){
+                var option = new Option(selectedObject, response.object_id, true, true);
+                $(".object_id").append(option).trigger('change');
+            }
         },
         error: function (response) {
             alertify.error("یک خطا غیرمنتظره رخ داد !");

@@ -24,7 +24,7 @@ class MenuParentHelper{
                 $response .= $this->menu_item_select_options($menu_item->children, $current, $edit_id,$prefix . "--");
         }
 
-        return '<option value="0">--</option>' . $response;
+        return $response;
     }
 
 }

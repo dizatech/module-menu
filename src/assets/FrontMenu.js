@@ -160,7 +160,7 @@ $('.add_menu').on('click', function(e) {
         success: function (response) {
             $('.not_information').hide();
             $('.has_information').hide();
-            if (menu_id == 0){
+            if (typeof menu_id == 'undefined'){
                 add_menu_row($('#site_menus_table tbody'), response.title, response.status_label, response.id);
                 empty_inputs();
             }else {
