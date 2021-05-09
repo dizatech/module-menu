@@ -143,13 +143,6 @@ function hasMenuItem(){
 
 $('.new_menu_item').on('click', function (e) {
     empty_inputs();
-    $.ajax({
-        url: baseUrl + '/panel/menu-item/get/menu-parents',
-        dataType: 'json',
-        success: function (response) {
-            $('.parent_id').html('<option value="0">--</option>' + response.menu_parent);
-        }
-    });
 });
 
 // start add new menu ajax handler
@@ -193,6 +186,16 @@ function empty_inputs(){
     $('.menu_item_id').val(0);
     $(".status").val(0);
     $(".status").trigger('change');
+    $.ajax({
+        url: baseUrl + '/panel/menu-item/get/menu-parents',
+        dataType: 'json',
+        data: {
+            menu_id: menu
+        },
+        success: function (response) {
+            $('.parent_id').html('<option value="0">--</option>' + response.menu_parent);
+        }
+    });
     $(".parent_id").val(0);
     $(".parent_id").trigger('change');
 }
@@ -347,7 +350,8 @@ $('#menu_items_table').on('click', '.edit_menu_item', function (e) {
                 dataType: 'json',
                 data: {
                     menu_item_id: menu_id,
-                    parent_id: response.parent_id
+                    parent_id: response.parent_id,
+                    menu_id: menu
                 },
                 success: function (res) {
                     $('.parent_id').html('<option value="0">--</option>' + res.menu_parent);

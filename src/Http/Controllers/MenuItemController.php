@@ -113,9 +113,9 @@ class MenuItemController extends Controller
         return response()->json(['status' => 'با موفقیت حذف شد']);
     }
 
-    public function getMenuItems(MenuItem $menuItem)
+    public function getMenuItems(Menu $MenuItem)
     {
-        return json_encode($menuItem->orderBy('sort_order')->get());
+        return json_encode($MenuItem->menu_items()->orderBy('sort_order')->get());
     }
 
     public function sortMenu(Request $request)
@@ -174,7 +174,13 @@ class MenuItemController extends Controller
 
     public function getMenuParents(Request $request)
     {
-        $menuItems = MenuItem::query()->where('parent_id', 0)->get();
+        $request->validate([
+            'menu_id' => 'required'
+        ]);
+        $menuItems = MenuItem::query()
+            ->where('parent_id', 0)
+            ->where('menu_id', $request->menu_id)
+            ->get();
         if ($request->has('parent_id')){
             $menu_parent = MenuParentFacade::menu_item_select_options($menuItems, $request->parent_id ,$request->menu_item_id);
         }else{
