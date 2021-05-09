@@ -40,9 +40,11 @@
                                         <option value="video" title="ویدیو">
                                             ویدیو
                                         </option>
+                                        <!--
                                         <option value="video_category" title="دسته‌بندی ویدیو">
                                             دسته‌بندی ویدیو
                                         </option>
+                                        -->
                                         <option value="service" title="خدمت">
                                             خدمت
                                         </option>
