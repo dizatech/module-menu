@@ -27,8 +27,7 @@ class MenuItemRequest extends FormRequest
             'title' => ['nullable','string','max:255'],
             'css_class' => ['nullable','string','max:255'],
             'status' => ['required','in:0,1'],
-            'type' => ['required', 'in:custom,heading,news,news_category,article,article_category,
-            video,video_category,service,service_category,laboratory,equipment'],
+            'type' => ['required', 'in:custom,heading,news,news_category,article,article_category,video,video_category,service,service_category,laboratory,equipment'],
             'parent_id' => ['integer'],
         ];
     }

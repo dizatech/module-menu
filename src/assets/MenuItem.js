@@ -179,13 +179,13 @@ $('.add_menu_item').on('click', function(e) {
 
 //start empty inputs
 function empty_inputs(){
-    console.log('empty inputs');
     $('#menu_item_data :input').val('');
     $('.type').val('choose');
     $('.type').trigger('change');
     $('.menu_item_id').val(0);
     $(".status").val(0);
     $(".status").trigger('change');
+    $(".parent_id").html('');
     $.ajax({
         url: baseUrl + '/panel/menu-item/get/menu-parents',
         dataType: 'json',
