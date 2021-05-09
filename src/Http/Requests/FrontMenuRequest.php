@@ -25,7 +25,7 @@ class FrontMenuRequest extends FormRequest
     {
         return [
             'title' => ['required','string','max:255'],
-            'css_class' => ['string','max:255'],
+            'css_class' => ['nullable','string','max:255'],
             'menu_status' => ['required','in:0,1'],
         ];
     }
