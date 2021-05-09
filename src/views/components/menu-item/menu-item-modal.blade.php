@@ -48,9 +48,11 @@
                                         <option value="service" title="خدمت">
                                             خدمت
                                         </option>
+                                        <!--
                                         <option value="service_category" title="دسته‌بندی خدمت">
                                             دسته‌بندی خدمت
                                         </option>
+                                        -->
                                         <option value="laboratory" title="آزمایشگاه">
                                             آزمایشگاه
                                         </option>

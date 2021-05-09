@@ -40,7 +40,7 @@ function load_menu_item(empty_table) {
             setTimeout(function (){
                 if (response.length > 0){
                     for( let i=0; i<response.length; i++ ){
-                        add_menu_item_row( $('#menu_items_table tbody'), response[i].title, response[i].status_label, response[i].id );
+                        add_menu_item_row( $('#menu_items_table tbody'), response[i].title, response[i].status_label, response[i].id, response[i].type_label );
                     }
                 }else {
                     menu_items_table.append(not_information);
@@ -52,11 +52,12 @@ function load_menu_item(empty_table) {
 // end load menus from database
 
 // start add menus row after insert menus in ajax
-function add_menu_item_row( target, menu_title, menu_status, menu_id ){
+function add_menu_item_row( target, menu_title, menu_status, menu_id , type){
     target.append(
         "<tr class='list_row'>" +
         "<td>" + menu_id + " <input type='hidden' name='menu_item_ids[]' value='" + menu_id + "'></td>" +
         "<td>" + menu_title + " </td>" +
+        "<td>" + type + " </td>" +
         "<td>" + menu_status + "</td>" +
         "<td>" +
         "<a href='#' data-id='"+menu_id+"' class='btn btn-sm btn-success edit_menu_item'>ویرایش</a>" +
@@ -160,7 +161,7 @@ $('.add_menu_item').on('click', function(e) {
             $('.has_information').hide();
             if (menu_item_id == 0){
                 hide_error_messages();
-                add_menu_item_row($('#menu_items_table tbody'), response.title, response.status_label, response.id);
+                add_menu_item_row($('#menu_items_table tbody'), response.title, response.status_label, response.id, response.type_label);
                 empty_inputs();
                 show_success_message(modal_id,response.message);
             }else {

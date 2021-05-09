@@ -89,6 +89,7 @@ class MenuItemController extends Controller
                 'id' => $menu->id,
                 'title' => $menu->title,
                 'status_label' => $menu->status_label,
+                'type_label' => $menu->type_label,
                 'message' => 'آیتم باموفقیت ثبت شد.',
             ));
         }elseif ($request->menu_item_id > 0){
