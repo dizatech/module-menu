@@ -160,7 +160,8 @@ $('.add_menu').on('click', function(e) {
         success: function (response) {
             $('.not_information').hide();
             $('.has_information').hide();
-            if (menu_id == 0  || typeof menu_id == 'undefined'){
+            if (menu_id == 0){
+                hide_error_messages();
                 add_menu_row($('#site_menus_table tbody'), response.title, response.status_label, response.id);
                 empty_inputs();
                 show_success_message(modal_id,response.message);
@@ -184,6 +185,7 @@ $('.add_menu').on('click', function(e) {
 //start empty inputs
 function empty_inputs(){
     $('#menu_data :input').val('');
+    $('.menu_id').val(0);
     $(".menu_status").val(0);
     $(".menu_status").trigger('change');
 }

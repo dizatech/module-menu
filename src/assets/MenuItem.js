@@ -155,7 +155,7 @@ $('.new_menu_item').on('click', function (e) {
 // start add new menu ajax handler
 $('.add_menu_item').on('click', function(e) {
     e.preventDefault();
-    let menu_item_id = $('#menu_items_table').find('.menu_item_id').val();
+    let menu_item_id = $('.menu_item_id').val();
     let modal_id = $(this).data('modal');
     $.ajax({
         type: 'patch',
@@ -165,18 +165,15 @@ $('.add_menu_item').on('click', function(e) {
         success: function (response) {
             $('.not_information').hide();
             $('.has_information').hide();
-            if (menu_item_id == 0 || typeof menu_item_id == 'undefined'){
+            if (menu_item_id == 0){
+                hide_error_messages();
                 add_menu_item_row($('#menu_items_table tbody'), response.title, response.status_label, response.id);
                 empty_inputs();
                 show_success_message(modal_id,response.message);
             }else {
                 hide_error_messages();
-                if (response.status == 500){
-                    show_error_message(modal_id,response.message);
-                }else {
-                    load_menu_item(true);
-                    show_success_message(modal_id,response.message);
-                }
+                load_menu_item(true);
+                show_success_message(modal_id,response.message);
             }
         },
         error: function (response) {
@@ -189,7 +186,11 @@ $('.add_menu_item').on('click', function(e) {
 
 //start empty inputs
 function empty_inputs(){
+    console.log('empty inputs');
     $('#menu_item_data :input').val('');
+    $('.type').val('choose');
+    $('.type').trigger('change');
+    $('.menu_item_id').val(0);
     $(".status").val(0);
     $(".status").trigger('change');
     $(".parent_id").val(0);
@@ -380,7 +381,7 @@ $('.type').on('change', function () {
             $('.object_container').hide('.5');
             $('.title_required').html('*');
             break;
-        case '':
+        case 'choose':
             $('.item_title').hide('.5');
             $('.item_url').hide('.5');
             $('.object_container').hide('.5');

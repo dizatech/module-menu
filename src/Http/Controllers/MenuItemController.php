@@ -82,7 +82,7 @@ class MenuItemController extends Controller
             'status' => '500'
         ));
         $parent_menu = $MenuItem;
-        if (is_null($request->menu_item_id)){
+        if ($request->menu_item_id == 0){
             $menu = MenusFacade::createMenuItem($request,$MenuItem,$parent_menu);
             $response = json_encode(array(
                 'status' => '200',

@@ -81,6 +81,7 @@ class MenuItemRequest extends FormRequest
             'object_id.required' => 'این فیلد الزامی است.',
             'type.required' => 'فیلد نوع الزامی است.',
             'css_class.string' => 'فیلد کلاس css معتبر نیست.',
+            'type.in' => 'لطفا نوع منو را انتخاب کنید',
         ];
     }
 

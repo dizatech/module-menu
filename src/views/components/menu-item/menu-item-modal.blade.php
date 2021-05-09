@@ -16,7 +16,7 @@
                                     <label for="type"><strong>نوع</strong></label>
                                     <select name="type" id="type"
                                             class="form-control type">
-                                        <option value="">
+                                        <option value="choose">
                                             انتخاب کنید...
                                         </option>
                                         <option value="custom" title="منو سفارشی">

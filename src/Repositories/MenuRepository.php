@@ -105,7 +105,11 @@ class MenuRepository
             }
             $object_id = $request->object_id;
         }else{
-            $url = $request->url;
+            if($request->type == 'heading'){
+                $url = '';
+            }else{
+                $url = $request->url;
+            }
             $title = $request->title;
             $object_id = 0;
         }
