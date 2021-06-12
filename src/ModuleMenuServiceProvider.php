@@ -8,6 +8,7 @@ use Dizatech\ModuleMenu\Facades\ModuleMenusFacade;
 use Dizatech\ModuleMenu\Repositories\MenuRepository;
 use Dizatech\ModuleMenu\Services\Helpers\MenuParentHelper;
 use Dizatech\ModuleMenu\Services\Helpers\ModuleMenusHelper;
+use Dizatech\ModuleMenu\View\Components\FrontMenu;
 use Dizatech\ModuleMenu\View\Components\ModuleMenu;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
@@ -49,7 +50,8 @@ class ModuleMenuServiceProvider extends ServiceProvider
             __DIR__.'/assets/' => resource_path('js/vendor/ModuleMenu')
         ], 'module-menu');
         $this->loadViewComponentsAs('', [
-            ModuleMenu::class
+            ModuleMenu::class,
+            FrontMenu::class
         ]);
     }
 }
