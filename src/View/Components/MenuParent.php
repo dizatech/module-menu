@@ -17,6 +17,8 @@ class MenuParent extends Component
 
     public $menu_item_id;
 
+    public $create_page, $edit_page;
+
     public function __construct($page,$menu_item = '',$parent = '')
     {
         // Set input variables to generate a component
@@ -29,9 +31,11 @@ class MenuParent extends Component
     {
         switch ($this->page){
             case 'create':
-                return MenuParentFacade::menu_item_select_options($this->menu_items(), old('parent_id'));
+                $this->create_page = MenuParentFacade::menu_item_select_options($this->menu_items(), old('parent_id'));
+                return view('vendor.ModuleMenu.components.menu-parent.create');
             case 'edit':
-                return MenuParentFacade::menu_item_select_options($this->menu_items(), old('parent_id', $this->parent_id), $this->menu_item_id);
+                $this->edit_page = MenuParentFacade::menu_item_select_options($this->menu_items(), old('parent_id', $this->parent_id), $this->menu_item_id);
+                return view('vendor.ModuleMenu.components.menu-parent.edit');
         }
     }
 
