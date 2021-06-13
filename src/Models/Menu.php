@@ -27,7 +27,8 @@ class Menu extends Model
     {
         return $this->hasMany(MenuItem::class)
             ->where('status', '=', '1')
-            ->where('parent_id', '=', '0');
+            ->where('parent_id', '=', '0')
+            ->orderBy('sort_order', 'asc');
     }
 
     public function getStatusLabelattribute()
