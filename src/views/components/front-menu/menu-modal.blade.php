@@ -33,7 +33,6 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <span class="text-danger">*</span>
                                     <label for="url"><strong>url</strong></label>
                                     <input type='text' id='url' class='form-control' name='url' value='' style="direction: ltr" />
                                     <span class="invalid-feedback d-none" role="alert">

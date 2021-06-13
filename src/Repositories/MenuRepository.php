@@ -16,6 +16,7 @@ class MenuRepository
     {
         $menu = Menu::query()->create([
             'title' => $request->title,
+            'url' => $request->url,
             'css_class' => $request->css_class,
             'status' => $request->menu_status,
             'sort_order' => $this->getMenuSortOrder($menuGroup)
@@ -30,6 +31,7 @@ class MenuRepository
             ->where('id', '=', $request->menu_id)
             ->update([
                 'title' => $request->title,
+                'url' => $request->url,
                 'css_class' => $request->css_class,
                 'status' => $request->menu_status,
             ]);

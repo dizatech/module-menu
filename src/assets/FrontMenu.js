@@ -323,6 +323,7 @@ $('#site_menus_table').on('click', '.edit_menu', function (e) {
             $('#menu_item').modal('show');
             $('#title').val(response.title);
             $('#css_class').val(response.css_class);
+            $('#url').val(response.url);
             $(".menu_status").val(response.menu_status);
             $(".menu_status").trigger('change');
             $('.menu_id').val(response.menu_id);
