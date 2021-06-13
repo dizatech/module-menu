@@ -26,7 +26,8 @@ class Menu extends Model
     public function active_menu_items()
     {
         return $this->hasMany(MenuItem::class)
-            ->where('status', '=', '1');
+            ->where('status', '=', '1')
+            ->where('parent_id', '=', '0');
     }
 
     public function getStatusLabelattribute()
