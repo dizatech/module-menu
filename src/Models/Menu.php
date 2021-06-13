@@ -11,7 +11,7 @@ class Menu extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['title', 'css_class', 'status', 'sort_order'];
+    protected $fillable = ['title', 'url', 'css_class', 'status', 'sort_order'];
     protected $appends = ['status_label'];
 
     public function menu_groups() {
@@ -21,6 +21,12 @@ class Menu extends Model
     public function menu_items()
     {
         return $this->hasMany(MenuItem::class);
+    }
+
+    public function active_menu_items()
+    {
+        return $this->hasMany(MenuItem::class)
+            ->where('status', '=', '1');
     }
 
     public function getStatusLabelattribute()

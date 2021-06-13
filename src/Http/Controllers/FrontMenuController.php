@@ -134,6 +134,7 @@ class FrontMenuController extends Controller
         return json_encode(array(
             'status' => '200',
             'title' => $menu->title,
+            'url' => $menu->url,
             'css_class' => $menu->css_class,
             'menu_status' => $menu->status,
             'menu_id' => $menu->id
