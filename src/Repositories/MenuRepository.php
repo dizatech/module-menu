@@ -97,7 +97,7 @@ class MenuRepository
 
     public function prepareRequest($request)
     {
-        if ($request->type != 'heading' && $request->type != 'custom'){
+        if ($request->type != 'heading' && $request->type != 'custom' && $request->type != 'group'){
             $object = $this->getObject($request->type, null, $request->object_id);
             $url = $this->urlGenerator($request->object_id,$request->type, $object);
             if (is_null($request->title)){
@@ -114,6 +114,10 @@ class MenuRepository
             }
             $title = $request->title;
             $object_id = 0;
+            if ($request->type == 'group'){
+                $title = '';
+                $url = '';
+            }
         }
         return [
             'title' => $title,

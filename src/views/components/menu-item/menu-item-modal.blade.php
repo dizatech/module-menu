@@ -19,6 +19,9 @@
                                         <option value="choose">
                                             انتخاب کنید...
                                         </option>
+                                        <option value="group" title="گروه">
+                                            گروه
+                                        </option>
                                         <option value="custom" title="منو سفارشی">
                                             منو سفارشی
                                         </option>

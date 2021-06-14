@@ -49,6 +49,9 @@ class MenuItem extends Model
             case 'custom':
                 return 'منو سفارشی';
                 break;
+            case 'group':
+                return 'گروه';
+                break;
             case 'heading':
                 return 'تیتر منو';
                 break;

@@ -53,6 +53,9 @@ function load_menu_item(empty_table) {
 
 // start add menus row after insert menus in ajax
 function add_menu_item_row( target, menu_title, menu_status, menu_id , type){
+    if (menu_title == ''){
+        menu_title = '-';
+    }
     target.append(
         "<tr class='list_row'>" +
         "<td>" + menu_id + " <input type='hidden' name='menu_item_ids[]' value='" + menu_id + "'></td>" +
@@ -379,6 +382,11 @@ $('.type').on('change', function () {
             $('.item_url').show('.5');
             $('.object_container').hide('.5');
             $('.title_required').html('*');
+            break;
+        case 'group':
+            $('.item_title').hide('.5');
+            $('.item_url').hide('.5');
+            $('.object_container').hide('.5');
             break;
         case 'heading':
             $('.item_title').show('.5');
