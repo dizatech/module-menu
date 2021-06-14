@@ -65,7 +65,7 @@
                                         @endslot
                                         @slot('tbody')
                                             <tr class="has_menu_items">
-                                                <td class="text-center" colspan="5">
+                                                <td class="text-center" colspan="6">
                                                     <div class="d-flex justify-content-center">
                                                         <div class="my-4">
                                                             <div class="spinner-border text-warning" role="status">

@@ -4,7 +4,7 @@ let not_information = '<tr class="not_information"><td class="text-center" colsp
 
 let menu_item_loading = `
 <tr class="has_menu_items">
-     <td class="text-center" colspan="5">
+     <td class="text-center" colspan="6">
           <div class="d-flex justify-content-center">
                 <div class="my-4">
                     <div class="spinner-border text-warning" role="status">
@@ -42,7 +42,11 @@ function load_menu_item(empty_table) {
                 if (response.length > 0){
                     for( let i=0; i<response.length; i++ ){
                         if (response[i].parent !== null){
-                            parent_title = response[i].parent['title'];
+                            if (response[i].parent['title'] == ''){
+                                parent_title = "گروه (شناسه " + response[i].parent['id'] + " )";
+                            }else {
+                                parent_title = response[i].parent['title'];
+                            }
                         }else {
                             parent_title = '-';
                         }

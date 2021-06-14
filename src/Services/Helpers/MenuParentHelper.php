@@ -15,9 +15,14 @@ class MenuParentHelper{
         }
         foreach ($menu_items as $menu_item) {
             $selected = ($menu_item->id == $current) ? "selected='selected'" : "";
-            $title = $menu_item->title;
-            if ($prefix != "")
+            if ($menu_item->title == '' || is_null($menu_item->title)){
+                $title = 'گروه (شناسه ' . $menu_item->id . ' )';
+            }else{
+                $title = $menu_item->title;
+            }
+            if ($prefix != ""){
                 $title = $prefix . " " . $title;
+            }
             $response .= "<option value='{$menu_item->id}' {$selected}>{$title}</option>";
 
             if ($menu_item->has('children'))
