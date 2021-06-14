@@ -19,12 +19,11 @@ class FrontMenu extends Component
     public function render()
     {
         $this->getMenus();
-        info($this->menus);
         switch ($this->menuGroup){
             case 'desktop-navbar-menu':
                 return view('vendor.ModuleMenu.components.front-menu.desktop-menu-render');
             case 'mobile-navbar-menu':
-                return view('vendor.ModuleMenu.components.front-menu.desktop-menu-render');
+                return view('vendor.ModuleMenu.components.front-menu.mobile-menu-render');
         }
     }
 
