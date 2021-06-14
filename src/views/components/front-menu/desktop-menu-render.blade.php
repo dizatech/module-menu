@@ -1,5 +1,5 @@
 @forelse($menus as $menu)
-    <li class="side_menu menu-item">
+    <li class="side_menu menu-item {{ is_null($menu->css_class) ? '' : $menu->css_class }}">
         <a href="{{ is_null($menu->url) ? '#' : $menu->url }}">
             {{ $menu->title }}
         </a>
