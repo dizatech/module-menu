@@ -17,11 +17,11 @@
                                         $active_menu_item_children = $active_menu_item->children()->where('type', 'group')->get();
                                     @endphp
                                     @if(count($active_menu_item_children) > 0)
-                                        @foreach($active_menu_item->children as $child)
+                                        @foreach($active_menu_item->children()->orderBy('sort_order', 'ASC')->get() as $child)
                                             @if($child->type == 'group')
                                                 <div class="{{ is_null($child->css_class) ? '' : $child->css_class }} menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
                                                     <ul class="end-menu">
-                                                        @foreach($child->children as $item)
+                                                        @foreach($child->children()->orderBy('sort_order', 'ASC')->get() as $item)
                                                             @if($item->type == 'heading')
                                                                 <li>
                                                                     <h5>{{ $item->title }}</h5>
