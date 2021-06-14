@@ -47,7 +47,7 @@
                                         @endforeach
                                     @else
                                         <div class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
-                                            @foreach($active_menu_item->children as $child)
+                                            @foreach($active_menu_item->children()->orderBy('sort_order', 'ASC')->get() as $child)
                                                 <ul class="end-menu">
                                                     @if($child->type == 'heading')
                                                         <li>
@@ -60,7 +60,7 @@
                                                             </a>
                                                         </li>
                                                     @endif
-                                                    @foreach($child->children as $item)
+                                                    @foreach($child->children()->orderBy('sort_order', 'ASC')->get() as $item)
                                                         <li class="menu-item">
                                                             <a href="{{ is_null($item->url) ? '#' : $item->url }}">
                                                                 <span class="fa fa-angle-left fa-fw"></span>{{ $item->title }}
