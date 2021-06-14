@@ -12,32 +12,58 @@
                         </a>
                         @if(count($active_menu_item->children) > 0)
                             <div class="row">
-                                <div class="mega-menu d-flex">
-                                    @foreach($active_menu_item->children as $child)
-                                        @if($child->type == 'div')
-                                            
-                                        @endif
-                                        <ul class="end-menu">
-                                            @if($child->type == 'heading')
-                                                <li>
-                                                    <h5>{{ $child->title }}</h5>
-                                                </li>
-                                            @else
-                                                <li class="menu-item">
-                                                    <a href="{{ is_null($child->url) ? '#' : $child->url }}">
-                                                        <span class="fa fa-angle-left fa-fw"></span>{{ $child->title }}
-                                                    </a>
-                                                </li>
+                                <div class="mega-menu">
+                                    @php
+                                        $active_menu_item_children = $active_menu_item->children()->where('type', 'group')->get();
+                                    @endphp
+                                    @if(count($active_menu_item_children) > 0)
+                                        @foreach($active_menu_item->children as $child)
+                                            @if($child->type == 'group')
+                                                <div class="{{ is_null($child->css_class) ? '' : $child->css_class }} menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
+                                                    <ul class="end-menu">
+                                                        @foreach($child->children as $item)
+                                                            @if($item->type == 'heading')
+                                                                <li>
+                                                                    <h5>{{ $child->title }}</h5>
+                                                                </li>
+                                                            @elseif ($item->type != 'group')
+                                                                <li class="menu-item">
+                                                                    <a href="{{ is_null($item->url) ? '#' : $item->url }}">
+                                                                        <span class="fa fa-angle-left fa-fw"></span>{{ $item->title }}
+                                                                    </a>
+                                                                </li>
+                                                            @endif
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                             @endif
-                                            @foreach($child->children as $item)
-                                                <li class="menu-item">
-                                                    <a href="{{ is_null($item->url) ? '#' : $item->url }}">
-                                                        <span class="fa fa-angle-left fa-fw"></span>{{ $item->title }}
-                                                    </a>
-                                                </li>
+                                        @endforeach
+                                    @else
+                                        <div class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
+                                            @foreach($active_menu_item->children as $child)
+                                                <ul class="end-menu">
+                                                    @if($child->type == 'heading')
+                                                        <li>
+                                                            <h5>{{ $child->title }}</h5>
+                                                        </li>
+                                                    @else
+                                                        <li class="menu-item">
+                                                            <a href="{{ is_null($child->url) ? '#' : $child->url }}">
+                                                                <span class="fa fa-angle-left fa-fw"></span>{{ $child->title }}
+                                                            </a>
+                                                        </li>
+                                                    @endif
+                                                    @foreach($child->children as $item)
+                                                        <li class="menu-item">
+                                                            <a href="{{ is_null($item->url) ? '#' : $item->url }}">
+                                                                <span class="fa fa-angle-left fa-fw"></span>{{ $item->title }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
                                             @endforeach
-                                        </ul>
-                                    @endforeach
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         @endif
