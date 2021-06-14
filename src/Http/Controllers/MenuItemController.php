@@ -88,6 +88,7 @@ class MenuItemController extends Controller
                 'status' => '200',
                 'id' => $menu->id,
                 'title' => $menu->title,
+                'parent_title' => $menu->parent->title,
                 'status_label' => $menu->status_label,
                 'type_label' => $menu->type_label,
                 'message' => 'آیتم باموفقیت ثبت شد.',
@@ -116,7 +117,7 @@ class MenuItemController extends Controller
 
     public function getMenuItems(Menu $MenuItem)
     {
-        return json_encode($MenuItem->menu_items()->orderBy('sort_order')->get());
+        return json_encode($MenuItem->menu_items()->with('parent')->orderBy('sort_order')->get());
     }
 
     public function sortMenu(Request $request)
