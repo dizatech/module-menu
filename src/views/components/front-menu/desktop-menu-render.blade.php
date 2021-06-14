@@ -24,10 +24,17 @@
                                                         @foreach($child->children as $item)
                                                             @if($item->type == 'heading')
                                                                 <li>
-                                                                    <h5>{{ $child->title }}</h5>
+                                                                    <h5>{{ $item->title }}</h5>
                                                                 </li>
-                                                            @elseif ($item->type != 'group')
-                                                                <li class="menu-item">
+                                                                @foreach($item->children as $heading_child)
+                                                                    <li class="menu-item {{ is_null($heading_child->css_class) ? '' : $heading_child->css_class }}">
+                                                                        <a href="{{ is_null($heading_child->url) ? '#' : $heading_child->url }}">
+                                                                            <span class="fa fa-angle-left fa-fw"></span>{{ $heading_child->title }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endforeach
+                                                            @else
+                                                                <li class="menu-item {{ is_null($item->css_class) ? '' : $item->css_class }}">
                                                                     <a href="{{ is_null($item->url) ? '#' : $item->url }}">
                                                                         <span class="fa fa-angle-left fa-fw"></span>{{ $item->title }}
                                                                     </a>

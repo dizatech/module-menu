@@ -165,6 +165,7 @@ $('.add_menu_item').on('click', function(e) {
     e.preventDefault();
     let menu_item_id = $('.menu_item_id').val();
     let modal_id = $(this).data('modal');
+    let parent_title = '';
     $.ajax({
         type: 'patch',
         url: baseUrl + '/panel/menu-item/createOrUpdate/' + menu,
@@ -175,7 +176,12 @@ $('.add_menu_item').on('click', function(e) {
             $('.has_information').hide();
             if (menu_item_id == 0){
                 hide_error_messages();
-                add_menu_item_row($('#menu_items_table tbody'), response.title, response.status_label, response.id, response.type_label, response.parent_title);
+                if (response.parent_title == ''){
+                    parent_title = "گروه (شناسه " + response.id + " )";
+                }else {
+                    parent_title = response.parent_title;
+                }
+                add_menu_item_row($('#menu_items_table tbody'), response.title, response.status_label, response.id, response.type_label, parent_title);
                 empty_inputs();
                 show_success_message(modal_id,response.message);
             }else {
