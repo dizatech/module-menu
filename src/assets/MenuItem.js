@@ -1,6 +1,6 @@
 let menu = $('.menu').val();
 
-let not_information = '<tr class="not_information"><td class="text-center" colspan="5">موردی برای نمایش وجود ندارد</td></tr>';
+let not_information = '<tr class="not_information"><td class="text-center" colspan="6">موردی برای نمایش وجود ندارد</td></tr>';
 
 let menu_item_loading = `
 <tr class="has_menu_items">
