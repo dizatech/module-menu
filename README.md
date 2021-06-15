@@ -11,7 +11,7 @@ Using Composer :
 
 packagist : https://packagist.org/packages/dizatech/module-menu
 
-## Usage
+## Admin Panel Usage
 
 * publish blade files :
 
@@ -47,6 +47,16 @@ or shorten tags :
 `<x-module-menu type="manager" />`
 
 Please note that the default type of `x-module-menu` tag is `manager`
+
+## Front-end Usage
+
+to load desktop menus you must use this tag :
+
+`<x-front-menu menuGroup="desktop-navbar-menu"></x-front-menu>`
+
+to load mobile menus you must use this tag :
+
+`<x-front-menu menuGroup="mobile-navbar-menu"></x-front-menu>`
 
 ## Create Menus
 
