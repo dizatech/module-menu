@@ -88,7 +88,7 @@ class MenuItemController extends Controller
                 'status' => '200',
                 'id' => $menu->id,
                 'title' => $menu->title,
-                'parent_title' => $menu->parent == null ? '' : $menu->parent->title,
+                'parent_title' => $menu->parent == null ? '-' : $menu->parent->title,
                 'status_label' => $menu->status_label,
                 'type_label' => $menu->type_label,
                 'message' => 'آیتم باموفقیت ثبت شد.',
