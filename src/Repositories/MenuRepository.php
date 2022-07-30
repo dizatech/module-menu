@@ -77,7 +77,7 @@ class MenuRepository
                 $route_name = 'article.user_show';
                 break;
             case 'article_category':
-                $route_name = 'article_category.user_show';
+                $route_name = 'category.generic_show';
                 break;
             case 'video':
                 $route_name = 'video.user_show';
