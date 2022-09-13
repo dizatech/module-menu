@@ -11,9 +11,9 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": "7.1.*|7.2.*|7.3.*|7.4.*|8.*",
-        "laravel/framework": "7.*|8.*|9.*",
-        "santigarcor/laratrust": "7.*"
+        "php": "^7.1|^8.1",
+        "laravel/framework": "^7.0|^8.0|^9.0",
+        "santigarcor/laratrust": "^6.0|^7.0"
     },
     "autoload": {
         "psr-4": {
